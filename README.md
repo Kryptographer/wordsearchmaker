@@ -32,6 +32,13 @@ A fun, interactive web application for creating and printing custom word search 
 - Answer key generation
 - Fill letter strategies (Random, Vowels, Consonants, Similar)
 
+### Content Safety
+- **Automatic content filtering** for inappropriate words in all 6 supported languages
+- Filters user input to block profanity and offensive terms
+- Prevents random letter filling from accidentally forming bad words
+- Multi-pass grid sanitization catches any words that slip through
+- Family-friendly puzzles guaranteed
+
 ### Interactive Features
 - Click-and-drag to find words in puzzles
 - Visual feedback for found words
@@ -72,12 +79,13 @@ Then open `http://localhost:8000` in your browser.
 
 ```
 wordsearchmaker/
-├── index.html      # Main HTML structure
-├── app.js          # Application logic and UI handling
-├── generator.js    # Puzzle generation engine
-├── templates.js    # Pre-made puzzle templates and i18n
-├── styles.css      # Styling and themes
-└── README.md       # This file
+├── index.html          # Main HTML structure
+├── app.js              # Application logic and UI handling
+├── generator.js        # Puzzle generation engine
+├── content-filter.js   # Content safety filters for all languages
+├── templates.js        # Pre-made puzzle templates and i18n
+├── styles.css          # Styling and themes
+└── README.md           # This file
 ```
 
 ## Usage
@@ -116,6 +124,7 @@ This is a static website with no backend dependencies. To deploy:
    - `index.html`
    - `app.js`
    - `generator.js`
+   - `content-filter.js`
    - `templates.js`
    - `styles.css`
 
