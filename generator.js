@@ -12,11 +12,15 @@ class WordSearchGenerator {
         this.hiddenMessage = options.hiddenMessage || '';
         this.fillType = options.fillType || 'random';
         this.uppercase = options.uppercase !== false;
+        this.language = options.language || 'en';
 
         this.grid = [];
         this.placedWords = [];
         this.shapeMask = [];
         this.directions = this.getDirectionsForDifficulty();
+
+        // Content filter for safeguards (uses global instance if available)
+        this.contentFilter = typeof contentFilter !== 'undefined' ? contentFilter : null;
 
         // Letter frequencies for realistic fills
         this.letterFrequencies = {
@@ -279,6 +283,27 @@ class WordSearchGenerator {
     }
 
     /**
+     * Get a safe random letter that won't form inappropriate words
+     * Tries multiple times to find a letter that doesn't create bad words
+     */
+    getSafeRandomLetter(x, y) {
+        const maxAttempts = 10;
+
+        for (let attempt = 0; attempt < maxAttempts; attempt++) {
+            const letter = this.getRandomLetter();
+
+            // If no content filter or this letter doesn't form a bad word, use it
+            if (!this.contentFilter || !this.contentFilter.wouldFormBadWord(this.grid, this.shapeMask, x, y, letter)) {
+                return letter;
+            }
+        }
+
+        // If all attempts failed, use a vowel (less likely to form offensive words)
+        const safeVowels = 'AEIOU';
+        return safeVowels[Math.floor(Math.random() * safeVowels.length)];
+    }
+
+    /**
      * Fill remaining empty cells
      */
     fillEmptyCells() {
@@ -307,10 +332,110 @@ class WordSearchGenerator {
             }
         }
 
-        // Fill remaining cells with random letters
+        // Fill remaining cells with safe random letters
         for (const cell of emptyCells) {
             if (this.grid[cell.y][cell.x] === '') {
-                this.grid[cell.y][cell.x] = this.getRandomLetter();
+                this.grid[cell.y][cell.x] = this.getSafeRandomLetter(cell.x, cell.y);
+            }
+        }
+
+        // Final safety check: scan the entire grid for any bad words that slipped through
+        this.sanitizeGrid();
+    }
+
+    /**
+     * Final sanitization pass - scan grid and fix any inappropriate words
+     */
+    sanitizeGrid() {
+        if (!this.contentFilter) return;
+
+        const maxPasses = 3;
+
+        for (let pass = 0; pass < maxPasses; pass++) {
+            const inappropriate = this.contentFilter.scanGridForInappropriate(this.grid, this.shapeMask);
+
+            if (inappropriate.length === 0) {
+                break; // Grid is clean
+            }
+
+            // For each inappropriate word found, scramble one of its letters
+            for (const item of inappropriate) {
+                // Find where this word appears in the grid and replace a middle letter
+                this.scrambleWordInGrid(item.word);
+            }
+        }
+    }
+
+    /**
+     * Find and scramble an inappropriate word in the grid
+     */
+    scrambleWordInGrid(word) {
+        const size = this.size;
+        const directions = [
+            { dx: 1, dy: 0 },
+            { dx: 0, dy: 1 },
+            { dx: 1, dy: 1 },
+            { dx: 1, dy: -1 },
+            { dx: -1, dy: 0 },
+            { dx: 0, dy: -1 },
+            { dx: -1, dy: -1 },
+            { dx: -1, dy: 1 }
+        ];
+
+        for (let y = 0; y < size; y++) {
+            for (let x = 0; x < size; x++) {
+                if (!this.shapeMask[y][x]) continue;
+
+                for (const dir of directions) {
+                    let found = true;
+                    const positions = [];
+
+                    for (let i = 0; i < word.length; i++) {
+                        const nx = x + i * dir.dx;
+                        const ny = y + i * dir.dy;
+
+                        if (nx < 0 || nx >= size || ny < 0 || ny >= size || !this.shapeMask[ny][nx]) {
+                            found = false;
+                            break;
+                        }
+
+                        if (this.grid[ny][nx].toUpperCase() !== word[i]) {
+                            found = false;
+                            break;
+                        }
+
+                        positions.push({ x: nx, y: ny });
+                    }
+
+                    if (found && positions.length > 0) {
+                        // Check if this position is part of a placed word
+                        // Only scramble if it's NOT part of intentionally placed words
+                        const midIndex = Math.floor(positions.length / 2);
+                        const pos = positions[midIndex];
+
+                        // Check if this cell is part of a placed word
+                        let isPlacedWord = false;
+                        for (const placed of this.placedWords) {
+                            if (word.toUpperCase() === placed.toUpperCase()) {
+                                isPlacedWord = true;
+                                break;
+                            }
+                        }
+
+                        if (!isPlacedWord) {
+                            // Replace with a vowel to break the word
+                            const safeLetters = 'AEIOU';
+                            const currentLetter = this.grid[pos.y][pos.x];
+                            let newLetter;
+                            do {
+                                newLetter = safeLetters[Math.floor(Math.random() * safeLetters.length)];
+                            } while (newLetter === currentLetter.toUpperCase());
+
+                            this.grid[pos.y][pos.x] = this.uppercase ? newLetter : newLetter.toLowerCase();
+                            return; // Fixed one occurrence
+                        }
+                    }
+                }
             }
         }
     }
@@ -327,6 +452,14 @@ class WordSearchGenerator {
 
         // Remove duplicates
         cleanWords = [...new Set(cleanWords)];
+
+        // Filter out inappropriate words using content filter
+        let blockedWords = [];
+        if (this.contentFilter) {
+            const filtered = this.contentFilter.filterWords(cleanWords, this.language);
+            cleanWords = filtered.clean;
+            blockedWords = filtered.blocked;
+        }
 
         this.initializeGrid();
         this.generateShapeMask();
@@ -374,6 +507,7 @@ class WordSearchGenerator {
             placedWords: this.placedWords,
             wordPlacements,
             failedWords,
+            blockedWords, // Words that were filtered due to content policy
             size: this.size,
             shape: this.shape,
             difficulty: this.difficulty

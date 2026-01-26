@@ -1266,7 +1266,8 @@ const I18N = {
         'print-with-answers': 'Print with Answers',
         'find-words': 'Find These Words:',
         'words': 'words',
-        'no-templates': 'No templates found matching your criteria.'
+        'no-templates': 'No templates found matching your criteria.',
+        'content-warning': 'Some words were removed because they contain inappropriate content.'
     },
     es: {
         'templates-title': 'Plantillas Prediseñadas',
@@ -1306,7 +1307,8 @@ const I18N = {
         'print-with-answers': 'Imprimir con Respuestas',
         'find-words': 'Encuentra Estas Palabras:',
         'words': 'palabras',
-        'no-templates': 'No se encontraron plantillas que coincidan con tus criterios.'
+        'no-templates': 'No se encontraron plantillas que coincidan con tus criterios.',
+        'content-warning': 'Algunas palabras fueron eliminadas porque contienen contenido inapropiado.'
     },
     fr: {
         'templates-title': 'Modèles Prêts à l\'Emploi',
@@ -1346,7 +1348,8 @@ const I18N = {
         'print-with-answers': 'Imprimer avec Réponses',
         'find-words': 'Trouvez Ces Mots:',
         'words': 'mots',
-        'no-templates': 'Aucun modèle ne correspond à vos critères.'
+        'no-templates': 'Aucun modèle ne correspond à vos critères.',
+        'content-warning': 'Certains mots ont été supprimés car ils contiennent du contenu inapproprié.'
     },
     de: {
         'templates-title': 'Fertige Vorlagen',
@@ -1386,7 +1389,8 @@ const I18N = {
         'print-with-answers': 'Mit Lösungen Drucken',
         'find-words': 'Finde Diese Wörter:',
         'words': 'Wörter',
-        'no-templates': 'Keine Vorlagen gefunden, die Ihren Kriterien entsprechen.'
+        'no-templates': 'Keine Vorlagen gefunden, die Ihren Kriterien entsprechen.',
+        'content-warning': 'Einige Wörter wurden entfernt, da sie unangemessene Inhalte enthalten.'
     },
     pt: {
         'templates-title': 'Modelos Prontos',
@@ -1426,7 +1430,8 @@ const I18N = {
         'print-with-answers': 'Imprimir com Respostas',
         'find-words': 'Encontre Estas Palavras:',
         'words': 'palavras',
-        'no-templates': 'Nenhum modelo encontrado que corresponda aos seus critérios.'
+        'no-templates': 'Nenhum modelo encontrado que corresponda aos seus critérios.',
+        'content-warning': 'Algumas palavras foram removidas porque contêm conteúdo inapropriado.'
     },
     it: {
         'templates-title': 'Modelli Pronti',
@@ -1466,7 +1471,8 @@ const I18N = {
         'print-with-answers': 'Stampa con Risposte',
         'find-words': 'Trova Queste Parole:',
         'words': 'parole',
-        'no-templates': 'Nessun modello trovato che corrisponda ai tuoi criteri.'
+        'no-templates': 'Nessun modello trovato che corrisponda ai tuoi criteri.',
+        'content-warning': 'Alcune parole sono state rimosse perché contengono contenuti inappropriati.'
     }
 };
 

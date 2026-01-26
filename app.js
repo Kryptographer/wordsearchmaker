@@ -207,7 +207,8 @@ class WordSearchApp {
             difficulty: template.difficulty,
             shape: template.shape,
             hiddenMessage: template.hiddenMessage || '',
-            fillType: template.difficulty === 'hard' || template.difficulty === 'extreme' ? 'similar' : 'random'
+            fillType: template.difficulty === 'hard' || template.difficulty === 'extreme' ? 'similar' : 'random',
+            language: template.language || 'en'
         });
 
         this.currentPuzzle = generator.generate();
@@ -218,6 +219,11 @@ class WordSearchApp {
             difficulty: template.difficulty,
             wordCategories: template.wordCategories || null
         };
+
+        // Show warning if any template words were blocked (shouldn't happen for curated templates)
+        if (this.currentPuzzle.blockedWords && this.currentPuzzle.blockedWords.length > 0) {
+            console.warn('Blocked words from template:', this.currentPuzzle.blockedWords);
+        }
 
         this.showModal();
     }
@@ -285,7 +291,8 @@ class WordSearchApp {
             shape,
             hiddenMessage,
             fillType,
-            uppercase
+            uppercase,
+            language: this.currentLanguage
         });
 
         this.currentPuzzle = generator.generate();
@@ -299,6 +306,12 @@ class WordSearchApp {
         // Show warning if some words couldn't be placed
         if (this.currentPuzzle.failedWords.length > 0) {
             console.warn('Could not place words:', this.currentPuzzle.failedWords);
+        }
+
+        // Show warning if some words were blocked by content filter
+        if (this.currentPuzzle.blockedWords && this.currentPuzzle.blockedWords.length > 0) {
+            console.warn('Blocked inappropriate words:', this.currentPuzzle.blockedWords);
+            this.showContentWarning(this.currentPuzzle.blockedWords.length);
         }
 
         this.renderPreview();
@@ -570,6 +583,55 @@ class WordSearchApp {
     showError(message) {
         // Simple alert for now - could be enhanced with a toast notification
         alert(message);
+    }
+
+    /**
+     * Show content warning when words are blocked
+     */
+    showContentWarning(count) {
+        const strings = I18N[this.currentLanguage] || I18N.en;
+        const message = strings['content-warning'] ||
+            `${count} word(s) were removed because they contain inappropriate content.`;
+        console.info(message);
+        // Show a brief non-intrusive notification
+        this.showToast(message, 'warning');
+    }
+
+    /**
+     * Show a toast notification
+     */
+    showToast(message, type = 'info') {
+        // Remove any existing toast
+        const existingToast = document.querySelector('.toast-notification');
+        if (existingToast) {
+            existingToast.remove();
+        }
+
+        const toast = document.createElement('div');
+        toast.className = `toast-notification toast-${type}`;
+        toast.textContent = message;
+        toast.style.cssText = `
+            position: fixed;
+            bottom: 20px;
+            left: 50%;
+            transform: translateX(-50%);
+            background: ${type === 'warning' ? '#f59e0b' : '#3b82f6'};
+            color: white;
+            padding: 12px 24px;
+            border-radius: 8px;
+            font-size: 14px;
+            z-index: 10000;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.15);
+            animation: slideUp 0.3s ease-out;
+        `;
+
+        document.body.appendChild(toast);
+
+        // Auto-remove after 4 seconds
+        setTimeout(() => {
+            toast.style.animation = 'slideDown 0.3s ease-out forwards';
+            setTimeout(() => toast.remove(), 300);
+        }, 4000);
     }
 }
 
