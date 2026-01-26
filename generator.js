@@ -547,6 +547,21 @@ class PuzzleRenderer {
     }
 
     /**
+     * Get translated string for "WORD SEARCH" subtitle
+     */
+    getWordSearchTitle() {
+        const translations = {
+            en: 'WORD SEARCH',
+            es: 'SOPA DE LETRAS',
+            fr: 'MOTS MÊLÉS',
+            de: 'WORTSUCHE',
+            pt: 'CAÇA-PALAVRAS',
+            it: 'CERCA PAROLE'
+        };
+        return translations[this.language] || translations.en;
+    }
+
+    /**
      * Get difficulty display info
      */
     getDifficultyInfo() {
@@ -703,7 +718,7 @@ class PuzzleRenderer {
         let html = `
             <div class="print-page" style="--cell-size: ${cellSize}px; --word-columns: ${wordColumns};">
                 <h1 class="print-puzzle-title">${this.escapeHtml(this.title)}</h1>
-                <p class="print-puzzle-subtitle">— WORD SEARCH —</p>
+                <p class="print-puzzle-subtitle">— ${this.getWordSearchTitle()} —</p>
                 <div class="print-grid">
         `;
 
