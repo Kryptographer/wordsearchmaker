@@ -273,6 +273,7 @@ class WordSearchApp {
         const shape = document.getElementById('grid-shape').value;
         const difficulty = document.getElementById('difficulty-select').value;
         const theme = document.getElementById('theme-select').value;
+        const puzzleLanguage = document.getElementById('puzzle-language').value;
         const showWordList = document.getElementById('show-word-list').checked;
         const uppercase = document.getElementById('uppercase-only').checked;
         const hiddenMessage = document.getElementById('hidden-message').value;
@@ -293,7 +294,7 @@ class WordSearchApp {
             hiddenMessage,
             fillType,
             uppercase,
-            language: this.currentLanguage
+            language: puzzleLanguage
         });
 
         this.currentPuzzle = generator.generate();
@@ -301,7 +302,8 @@ class WordSearchApp {
             title,
             theme,
             showWordList,
-            difficulty
+            difficulty,
+            language: puzzleLanguage
         };
 
         // Show warning if some words couldn't be placed
