@@ -1051,7 +1051,7 @@ body {
 .print-word-list {
     text-align: left;
     margin-top: auto;
-    padding-top: 15px;
+    padding-top: 20px;
     border: none;
     max-width: 100%;
     flex-shrink: 0;
@@ -1059,32 +1059,33 @@ body {
 
 .print-word-list-title {
     font-family: Arial, Helvetica, sans-serif;
-    font-size: 9pt;
+    font-size: 12pt;
     font-weight: bold;
-    margin-bottom: 5px;
+    margin-bottom: 8px;
     color: #000;
     text-transform: uppercase;
     letter-spacing: 1px;
-    padding-bottom: 3px;
-    border-bottom: 1px solid #000;
+    padding-bottom: 4px;
+    border-bottom: 1.5px solid #000;
 }
 
 /* Words in a clean multi-column grid */
 .print-words {
     display: grid;
     grid-template-columns: repeat(var(--word-columns, 5), 1fr);
-    gap: 2px 15px;
-    font-size: 9pt;
+    gap: 4px 20px;
+    font-size: 11pt;
     font-family: Arial, Helvetica, sans-serif;
     text-align: left;
     max-width: 100%;
 }
 
 .print-word {
-    padding: 1px 0;
+    padding: 2px 0;
     border: none;
     font-weight: normal;
     color: #000;
+    line-height: 1.5;
 }
 
 .print-answer-key-title {
@@ -1117,7 +1118,7 @@ body {
     text-align: left;
     width: 100%;
     margin-top: auto;
-    padding: 12px 0 0 0;
+    padding: 20px 0 0 0;
     border: none;
     box-sizing: border-box;
     flex-shrink: 0;
@@ -1126,7 +1127,7 @@ body {
 .print-word-categories {
     display: grid;
     grid-template-columns: repeat(5, 1fr);
-    gap: 0 10px;
+    gap: 8px 15px;
     width: 100%;
 }
 
@@ -1137,11 +1138,11 @@ body {
 
 .print-category-title {
     font-family: Arial, Helvetica, sans-serif;
-    font-size: 8pt;
+    font-size: 11pt;
     font-weight: bold;
-    margin-bottom: 2px;
-    padding-bottom: 0;
-    border-bottom: none;
+    margin-bottom: 4px;
+    padding-bottom: 2px;
+    border-bottom: 1px solid #000;
     color: #000;
     text-transform: uppercase;
 }
@@ -1153,11 +1154,11 @@ body {
 }
 
 .print-word-bullet {
-    padding: 0;
-    font-size: 9pt;
+    padding: 1px 0;
+    font-size: 11pt;
     font-family: Arial, Helvetica, sans-serif;
     color: #000;
-    line-height: 1.4;
+    line-height: 1.6;
 }
 
 /* Print instructions section */
