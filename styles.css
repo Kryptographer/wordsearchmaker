@@ -969,7 +969,7 @@ body {
 
 /* Print element styles - defined outside @media print for reliable rendering */
 .print-page {
-    padding: 8mm 10mm;
+    padding: 12mm 18mm;
     background: white;
     page-break-after: always;
     max-width: 8.5in;
@@ -985,28 +985,28 @@ body {
     page-break-after: avoid;
 }
 
-/* Compact mode for larger grids or many words */
+/* Compact mode - default for all puzzles */
 .print-page.print-compact {
-    padding: 6mm 8mm;
+    padding: 10mm 15mm;
 }
 
 .print-page.print-compact .print-puzzle-title {
-    font-size: 24pt;
+    font-size: 26pt;
     margin-bottom: 0;
 }
 
 .print-page.print-compact .print-puzzle-subtitle {
     font-size: 9pt;
-    margin-bottom: 3px;
+    margin-bottom: 0;
 }
 
 .print-page.print-compact .print-word-list {
-    padding-top: 8px;
+    padding-top: 15px;
 }
 
 .print-page.print-compact .print-word-list-title {
     font-size: 9pt;
-    margin-bottom: 5px;
+    margin-bottom: 6px;
 }
 
 /* Dense mode for very large grids or lots of words */
@@ -1087,10 +1087,10 @@ body {
     display: flex;
     flex-direction: column;
     align-items: center;
-    justify-content: center;
-    flex: 1 1 auto;
+    justify-content: flex-start;
+    flex: 0 0 auto;
     width: 100%;
-    min-height: 0;
+    padding-top: 10px;
 }
 
 .print-row {
@@ -1099,17 +1099,18 @@ body {
 }
 
 .print-cell {
-    width: var(--cell-size, 42px);
-    height: var(--cell-size, 42px);
+    width: var(--cell-size, 36px);
+    height: calc(var(--cell-size, 36px) * 0.85);
     display: flex;
     align-items: center;
     justify-content: center;
     font-family: Arial, Helvetica, sans-serif;
-    font-size: calc(var(--cell-size, 42px) * 0.43);
+    font-size: calc(var(--cell-size, 36px) * 0.5);
     font-weight: bold;
     color: #000;
     background: transparent;
     border: none;
+    line-height: 1;
 }
 
 .print-cell.hidden {
@@ -1137,15 +1138,16 @@ body {
 
 .print-word-list-title {
     font-family: Arial, Helvetica, sans-serif;
-    font-size: 10pt;
+    font-size: 9pt;
     font-weight: bold;
-    margin-bottom: 8px;
+    margin-bottom: 6px;
     color: #000;
     text-transform: uppercase;
     letter-spacing: 1px;
-    padding-bottom: 3px;
+    padding-bottom: 4px;
     border-bottom: 1px solid #000;
-    display: inline-block;
+    display: block;
+    text-align: left;
 }
 
 /* Words in a clean multi-column grid */
@@ -1199,7 +1201,7 @@ body {
     text-align: left;
     width: 100%;
     margin-top: auto;
-    padding: 10px 10px 0 10px;
+    padding: 12px 0 0 0;
     border: none;
     box-sizing: border-box;
     flex-shrink: 0;
@@ -1207,8 +1209,8 @@ body {
 
 .print-word-categories {
     display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(120px, 1fr));
-    gap: 6px 20px;
+    grid-template-columns: repeat(5, 1fr);
+    gap: 0 10px;
     width: 100%;
 }
 
@@ -1219,11 +1221,11 @@ body {
 
 .print-category-title {
     font-family: Arial, Helvetica, sans-serif;
-    font-size: 9pt;
+    font-size: 8pt;
     font-weight: bold;
-    margin-bottom: 4px;
-    padding-bottom: 2px;
-    border-bottom: 1px solid #000;
+    margin-bottom: 2px;
+    padding-bottom: 0;
+    border-bottom: none;
     color: #000;
     text-transform: uppercase;
 }
@@ -1239,7 +1241,7 @@ body {
     font-size: 9pt;
     font-family: Arial, Helvetica, sans-serif;
     color: #000;
-    line-height: 1.3;
+    line-height: 1.4;
 }
 
 /* Print instructions section */
