@@ -393,6 +393,7 @@ class PuzzleRenderer {
         this.showWordList = options.showWordList !== false;
         this.showAnswers = options.showAnswers || false;
         this.difficulty = options.difficulty || 'normal';
+        this.wordCategories = options.wordCategories || null;
     }
 
     /**
@@ -459,16 +460,44 @@ class PuzzleRenderer {
 
         // Word list
         if (this.showWordList && this.difficulty !== 'extreme') {
-            html += `
-                <div class="word-list-container">
-                    <h3 class="word-list-title">Find These Words:</h3>
-                    <div class="word-list">
-                        ${this.puzzle.placedWords.map(word =>
-                            `<span class="word-item">${word}</span>`
-                        ).join('')}
+            // Check if we have categorized words
+            if (this.wordCategories && Object.keys(this.wordCategories).length > 0) {
+                html += `
+                    <div class="word-list-container word-list-categorized">
+                        <h3 class="word-list-title">Find These Words:</h3>
+                        <div class="word-categories">
+                            ${Object.entries(this.wordCategories).map(([category, words]) => {
+                                // Only show words that were actually placed in the puzzle
+                                const placedInCategory = words.filter(w =>
+                                    this.puzzle.placedWords.includes(w.toUpperCase())
+                                );
+                                if (placedInCategory.length === 0) return '';
+                                return `
+                                    <div class="word-category">
+                                        <h4 class="category-title">${category}</h4>
+                                        <ul class="category-words">
+                                            ${placedInCategory.map(word =>
+                                                `<li class="word-item-bullet" data-word="${word.toUpperCase()}">${word}</li>`
+                                            ).join('')}
+                                        </ul>
+                                    </div>
+                                `;
+                            }).join('')}
+                        </div>
                     </div>
-                </div>
-            `;
+                `;
+            } else {
+                html += `
+                    <div class="word-list-container">
+                        <h3 class="word-list-title">Find These Words:</h3>
+                        <div class="word-list">
+                            ${this.puzzle.placedWords.map(word =>
+                                `<span class="word-item">${word}</span>`
+                            ).join('')}
+                        </div>
+                    </div>
+                `;
+            }
         } else if (this.difficulty === 'extreme') {
             html += `
                 <div class="word-list-container">
@@ -531,16 +560,44 @@ class PuzzleRenderer {
 
         // Word list
         if (this.showWordList && this.difficulty !== 'extreme') {
-            html += `
-                <div class="print-word-list">
-                    <h3 class="print-word-list-title">Find These Words:</h3>
-                    <div class="print-words">
-                        ${this.puzzle.placedWords.map(word =>
-                            `<span class="print-word">${word}</span>`
-                        ).join('')}
+            // Check if we have categorized words
+            if (this.wordCategories && Object.keys(this.wordCategories).length > 0) {
+                html += `
+                    <div class="print-word-list print-word-list-categorized">
+                        <h3 class="print-word-list-title">Find These Words:</h3>
+                        <div class="print-word-categories">
+                            ${Object.entries(this.wordCategories).map(([category, words]) => {
+                                // Only show words that were actually placed in the puzzle
+                                const placedInCategory = words.filter(w =>
+                                    this.puzzle.placedWords.includes(w.toUpperCase())
+                                );
+                                if (placedInCategory.length === 0) return '';
+                                return `
+                                    <div class="print-word-category">
+                                        <h4 class="print-category-title">${category}</h4>
+                                        <ul class="print-category-words">
+                                            ${placedInCategory.map(word =>
+                                                `<li class="print-word-bullet">${word}</li>`
+                                            ).join('')}
+                                        </ul>
+                                    </div>
+                                `;
+                            }).join('')}
+                        </div>
                     </div>
-                </div>
-            `;
+                `;
+            } else {
+                html += `
+                    <div class="print-word-list">
+                        <h3 class="print-word-list-title">Find These Words:</h3>
+                        <div class="print-words">
+                            ${this.puzzle.placedWords.map(word =>
+                                `<span class="print-word">${word}</span>`
+                            ).join('')}
+                        </div>
+                    </div>
+                `;
+            }
         }
 
         html += '</div>';
@@ -573,6 +630,35 @@ class PuzzleRenderer {
 
             html += `
                     </div>
+            `;
+
+            // Answer key word list - also supports categories
+            if (this.wordCategories && Object.keys(this.wordCategories).length > 0) {
+                html += `
+                    <div class="print-word-list print-word-list-categorized">
+                        <h3 class="print-word-list-title">Words Found:</h3>
+                        <div class="print-word-categories">
+                            ${Object.entries(this.wordCategories).map(([category, words]) => {
+                                const placedInCategory = words.filter(w =>
+                                    this.puzzle.placedWords.includes(w.toUpperCase())
+                                );
+                                if (placedInCategory.length === 0) return '';
+                                return `
+                                    <div class="print-word-category">
+                                        <h4 class="print-category-title">${category}</h4>
+                                        <ul class="print-category-words">
+                                            ${placedInCategory.map(word =>
+                                                `<li class="print-word-bullet">${word}</li>`
+                                            ).join('')}
+                                        </ul>
+                                    </div>
+                                `;
+                            }).join('')}
+                        </div>
+                    </div>
+                `;
+            } else {
+                html += `
                     <div class="print-word-list">
                         <h3 class="print-word-list-title">Words Found:</h3>
                         <div class="print-words">
@@ -581,8 +667,9 @@ class PuzzleRenderer {
                             ).join('')}
                         </div>
                     </div>
-                </div>
-            `;
+                `;
+            }
+            html += `</div>`;
         }
 
         return html;

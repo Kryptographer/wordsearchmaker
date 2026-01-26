@@ -215,7 +215,8 @@ class WordSearchApp {
             title: template.title,
             theme: 'classic',
             showWordList: template.difficulty !== 'extreme',
-            difficulty: template.difficulty
+            difficulty: template.difficulty,
+            wordCategories: template.wordCategories || null
         };
 
         this.showModal();
@@ -399,11 +400,12 @@ class WordSearchApp {
                         c.classList.add('found');
                     });
 
-                    // Mark word in list
-                    const wordItems = container.querySelectorAll('.word-item');
+                    // Mark word in list (supports both regular and categorized word lists)
+                    const wordItems = container.querySelectorAll('.word-item, .word-item-bullet');
                     wordItems.forEach(item => {
-                        if (item.textContent === selectedWord ||
-                            item.textContent === selectedWord.split('').reverse().join('')) {
+                        const itemWord = item.dataset.word || item.textContent;
+                        if (itemWord === selectedWord ||
+                            itemWord === selectedWord.split('').reverse().join('')) {
                             item.classList.add('found');
                         }
                     });
