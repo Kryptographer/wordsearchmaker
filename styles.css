@@ -969,7 +969,7 @@ body {
 
 /* Print element styles - defined outside @media print for reliable rendering */
 .print-page {
-    padding: 12mm 18mm;
+    padding: 8mm 12mm;
     background: white;
     page-break-after: always;
     max-width: 8.5in;
@@ -983,82 +983,6 @@ body {
 
 .print-page:last-child {
     page-break-after: avoid;
-}
-
-/* Compact mode - default for all puzzles */
-.print-page.print-compact {
-    padding: 10mm 15mm;
-}
-
-.print-page.print-compact .print-puzzle-title {
-    font-size: 26pt;
-    margin-bottom: 0;
-}
-
-.print-page.print-compact .print-puzzle-subtitle {
-    font-size: 9pt;
-    margin-bottom: 0;
-}
-
-.print-page.print-compact .print-word-list {
-    padding-top: 15px;
-}
-
-.print-page.print-compact .print-word-list-title {
-    font-size: 9pt;
-    margin-bottom: 6px;
-}
-
-/* Dense mode for very large grids or lots of words */
-.print-page.print-dense {
-    padding: 5mm 6mm;
-}
-
-.print-page.print-dense .print-puzzle-title {
-    font-size: 20pt;
-    margin-bottom: 0;
-}
-
-.print-page.print-dense .print-puzzle-subtitle {
-    font-size: 8pt;
-    margin-bottom: 2px;
-}
-
-.print-page.print-dense .print-grid {
-    flex: 0 0 auto;
-}
-
-.print-page.print-dense .print-word-list {
-    padding-top: 6px;
-}
-
-.print-page.print-dense .print-word-list-title {
-    font-size: 8pt;
-    margin-bottom: 4px;
-    padding-bottom: 2px;
-}
-
-.print-page.print-dense .print-words {
-    gap: 2px 15px;
-    font-size: 9pt;
-}
-
-.print-page.print-dense .print-word {
-    padding: 1px 0;
-}
-
-.print-page.print-dense .print-word-categories {
-    gap: 6px 15px;
-}
-
-.print-page.print-dense .print-category-title {
-    font-size: 8pt;
-    margin-bottom: 2px;
-}
-
-.print-page.print-dense .print-word-bullet {
-    font-size: 8pt;
-    padding: 0;
 }
 
 .print-puzzle-title {
@@ -1075,9 +999,9 @@ body {
 
 .print-puzzle-subtitle {
     text-align: center;
-    font-size: 10pt;
+    font-size: 9pt;
     color: #000;
-    margin-bottom: 5px;
+    margin-bottom: 0;
     font-weight: normal;
     letter-spacing: 2px;
 }
@@ -1088,9 +1012,9 @@ body {
     flex-direction: column;
     align-items: center;
     justify-content: flex-start;
-    flex: 0 0 auto;
+    flex: 1 1 auto;
     width: 100%;
-    padding-top: 10px;
+    padding-top: 5px;
 }
 
 .print-row {
@@ -1099,13 +1023,13 @@ body {
 }
 
 .print-cell {
-    width: var(--cell-size, 36px);
-    height: calc(var(--cell-size, 36px) * 0.85);
+    width: var(--cell-size, 45px);
+    height: var(--cell-size, 45px);
     display: flex;
     align-items: center;
     justify-content: center;
     font-family: Arial, Helvetica, sans-serif;
-    font-size: calc(var(--cell-size, 36px) * 0.5);
+    font-size: calc(var(--cell-size, 45px) * 0.5);
     font-weight: bold;
     color: #000;
     background: transparent;
@@ -1126,13 +1050,11 @@ body {
 
 /* Simple word list - no box, multi-column layout */
 .print-word-list {
-    text-align: center;
+    text-align: left;
     margin-top: auto;
-    padding-top: 10px;
+    padding-top: 15px;
     border: none;
     max-width: 100%;
-    margin-left: auto;
-    margin-right: auto;
     flex-shrink: 0;
 }
 
@@ -1140,33 +1062,28 @@ body {
     font-family: Arial, Helvetica, sans-serif;
     font-size: 9pt;
     font-weight: bold;
-    margin-bottom: 6px;
+    margin-bottom: 5px;
     color: #000;
     text-transform: uppercase;
     letter-spacing: 1px;
-    padding-bottom: 4px;
+    padding-bottom: 3px;
     border-bottom: 1px solid #000;
-    display: block;
-    text-align: left;
 }
 
 /* Words in a clean multi-column grid */
 .print-words {
     display: grid;
-    grid-template-columns: repeat(var(--word-columns, 4), 1fr);
-    gap: 4px 20px;
-    font-size: 10pt;
+    grid-template-columns: repeat(var(--word-columns, 5), 1fr);
+    gap: 2px 15px;
+    font-size: 9pt;
     font-family: Arial, Helvetica, sans-serif;
     text-align: left;
     max-width: 100%;
-    margin: 0 auto;
-    padding: 0 15px;
 }
 
 .print-word {
-    padding: 2px 0;
+    padding: 1px 0;
     border: none;
-    border-radius: 0;
     font-weight: normal;
     color: #000;
 }
@@ -1292,19 +1209,11 @@ body {
         page-break-after: always;
         page-break-inside: avoid;
         margin: 0;
-        padding: 10mm 12mm;
+        padding: 8mm 10mm;
         min-height: auto;
         height: auto;
         max-height: 100vh;
         overflow: hidden;
-    }
-
-    .print-page.print-compact {
-        padding: 8mm 10mm;
-    }
-
-    .print-page.print-dense {
-        padding: 6mm 8mm;
     }
 
     .print-page:last-child {

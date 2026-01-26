@@ -675,22 +675,17 @@ class PuzzleRenderer {
         const gridSize = this.puzzle.size;
         const wordCount = this.puzzle.placedWords.length;
 
-        // Calculate cell size to fit grid compactly on page
-        // Target a tighter grid layout similar to traditional word searches
-        const maxGridWidth = 420;
-        const cellSize = Math.min(36, Math.floor(maxGridWidth / gridSize));
+        // Maximize grid to fill page width
+        const maxGridWidth = 540;
+        const cellSize = Math.floor(maxGridWidth / gridSize);
 
-        // Determine word list columns based on word count
-        let wordColumns = 4;
-        if (wordCount > 15) wordColumns = 5;
+        // Word list columns
+        let wordColumns = 5;
         if (wordCount > 25) wordColumns = 6;
 
-        // Determine sizing class based on content density
-        let sizeClass = 'print-compact'; // Always use compact as baseline
-        if (gridSize >= 18 || wordCount > 25) sizeClass = 'print-dense';
 
         let html = `
-            <div class="print-page ${sizeClass}" style="--cell-size: ${cellSize}px; --word-columns: ${wordColumns};">
+            <div class="print-page" style="--cell-size: ${cellSize}px; --word-columns: ${wordColumns};">
                 <h1 class="print-puzzle-title">${this.escapeHtml(this.title)}</h1>
                 <p class="print-puzzle-subtitle">— WORD SEARCH —</p>
                 <div class="print-grid">
@@ -781,7 +776,7 @@ class PuzzleRenderer {
         // Answer key page
         if (includeAnswers) {
             html += `
-                <div class="print-page ${sizeClass}" style="--cell-size: ${cellSize}px; --word-columns: ${wordColumns};">
+                <div class="print-page" style="--cell-size: ${cellSize}px; --word-columns: ${wordColumns};">
                     <h2 class="print-answer-key-title">ANSWER KEY</h2>
                     <p class="print-puzzle-subtitle">${this.escapeHtml(this.title)}</p>
                     <div class="print-grid">
