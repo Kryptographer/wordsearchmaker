@@ -1,0 +1,302 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Word Search Maker - Create Custom Puzzles</title>
+    <link rel="stylesheet" href="styles.css">
+    <link href="https://fonts.googleapis.com/css2?family=Fredoka+One&family=Nunito:wght@400;600;700;800&display=swap" rel="stylesheet">
+</head>
+<body>
+    <div class="app-container">
+        <!-- Header -->
+        <header class="header">
+            <div class="logo">
+                <span class="logo-icon">🔍</span>
+                <h1>Word Search Maker</h1>
+            </div>
+            <nav class="nav-tabs">
+                <button class="nav-tab active" data-tab="templates">📚 Templates</button>
+                <button class="nav-tab" data-tab="custom">✏️ Create Custom</button>
+                <button class="nav-tab" data-tab="about">ℹ️ About</button>
+            </nav>
+            <div class="language-selector">
+                <label for="ui-language">🌐</label>
+                <select id="ui-language">
+                    <option value="en">English</option>
+                    <option value="es">Español</option>
+                    <option value="fr">Français</option>
+                    <option value="de">Deutsch</option>
+                    <option value="pt">Português</option>
+                    <option value="it">Italiano</option>
+                </select>
+            </div>
+        </header>
+
+        <!-- Main Content -->
+        <main class="main-content">
+            <!-- Templates Tab -->
+            <section id="templates-tab" class="tab-content active">
+                <div class="section-header">
+                    <h2 data-i18n="templates-title">Pre-Made Templates</h2>
+                    <p data-i18n="templates-desc">Choose from our collection of fun, ready-to-print word searches!</p>
+                </div>
+
+                <!-- Template Filters -->
+                <div class="template-filters">
+                    <div class="filter-group">
+                        <label data-i18n="category">Category:</label>
+                        <select id="template-category">
+                            <option value="all" data-i18n="all">All</option>
+                            <option value="bible" data-i18n="bible">Bible & Faith</option>
+                            <option value="holidays" data-i18n="holidays">Holidays</option>
+                            <option value="animals" data-i18n="animals">Animals</option>
+                            <option value="nature" data-i18n="nature">Nature</option>
+                            <option value="educational" data-i18n="educational">Educational</option>
+                        </select>
+                    </div>
+                    <div class="filter-group">
+                        <label data-i18n="language">Language:</label>
+                        <select id="template-language">
+                            <option value="en">English</option>
+                            <option value="es">Español</option>
+                            <option value="fr">Français</option>
+                            <option value="de">Deutsch</option>
+                        </select>
+                    </div>
+                    <div class="filter-group">
+                        <label data-i18n="difficulty">Difficulty:</label>
+                        <select id="template-difficulty">
+                            <option value="all" data-i18n="all">All</option>
+                            <option value="easy" data-i18n="easy">Easy</option>
+                            <option value="normal" data-i18n="normal">Normal</option>
+                            <option value="medium" data-i18n="medium">Medium</option>
+                            <option value="hard" data-i18n="hard">Hard</option>
+                            <option value="extreme" data-i18n="extreme">Extreme</option>
+                        </select>
+                    </div>
+                </div>
+
+                <!-- Template Grid -->
+                <div class="template-grid" id="template-grid">
+                    <!-- Templates will be populated by JavaScript -->
+                </div>
+            </section>
+
+            <!-- Custom Tab -->
+            <section id="custom-tab" class="tab-content">
+                <div class="custom-builder">
+                    <div class="builder-panel">
+                        <h2 data-i18n="create-custom">Create Your Own Word Search</h2>
+
+                        <!-- Title Input -->
+                        <div class="form-group">
+                            <label for="puzzle-title" data-i18n="puzzle-title">Puzzle Title:</label>
+                            <input type="text" id="puzzle-title" placeholder="My Word Search" maxlength="50">
+                        </div>
+
+                        <!-- Words Input -->
+                        <div class="form-group">
+                            <label for="word-input" data-i18n="enter-words">Enter Words (one per line or comma separated):</label>
+                            <textarea id="word-input" rows="6" placeholder="HAPPY&#10;PUZZLE&#10;SEARCH&#10;WORDS&#10;FUN"></textarea>
+                            <div class="word-count">
+                                <span id="word-count">0</span> <span data-i18n="words-entered">words entered</span>
+                            </div>
+                        </div>
+
+                        <!-- Grid Settings -->
+                        <div class="settings-row">
+                            <div class="form-group">
+                                <label for="grid-size" data-i18n="grid-size">Grid Size:</label>
+                                <select id="grid-size">
+                                    <option value="8">8 × 8 (Small)</option>
+                                    <option value="10">10 × 10 (Small)</option>
+                                    <option value="12">12 × 12 (Medium)</option>
+                                    <option value="15" selected>15 × 15 (Standard)</option>
+                                    <option value="18">18 × 18 (Large)</option>
+                                    <option value="20">20 × 20 (Extra Large)</option>
+                                    <option value="25">25 × 25 (Giant)</option>
+                                </select>
+                            </div>
+
+                            <div class="form-group">
+                                <label for="grid-shape" data-i18n="shape">Shape:</label>
+                                <select id="grid-shape">
+                                    <option value="square">◼️ Square</option>
+                                    <option value="circle">⚫ Circle</option>
+                                    <option value="heart">❤️ Heart</option>
+                                    <option value="cross">✝️ Cross</option>
+                                    <option value="star">⭐ Star</option>
+                                    <option value="diamond">💎 Diamond</option>
+                                    <option value="triangle">🔺 Triangle</option>
+                                    <option value="oval">🥚 Oval</option>
+                                </select>
+                            </div>
+                        </div>
+
+                        <div class="settings-row">
+                            <div class="form-group">
+                                <label for="difficulty-select" data-i18n="difficulty">Difficulty:</label>
+                                <select id="difficulty-select">
+                                    <option value="easy">😊 Easy</option>
+                                    <option value="normal" selected>🙂 Normal</option>
+                                    <option value="medium">😐 Medium</option>
+                                    <option value="hard">😰 Hard</option>
+                                    <option value="extreme">🔥 Extreme</option>
+                                </select>
+                            </div>
+
+                            <div class="form-group">
+                                <label for="theme-select" data-i18n="theme">Theme:</label>
+                                <select id="theme-select">
+                                    <option value="classic">📄 Classic</option>
+                                    <option value="colorful">🌈 Colorful</option>
+                                    <option value="nature">🌿 Nature</option>
+                                    <option value="ocean">🌊 Ocean</option>
+                                    <option value="space">🚀 Space</option>
+                                    <option value="candy">🍬 Candy</option>
+                                    <option value="chalkboard">📝 Chalkboard</option>
+                                </select>
+                            </div>
+                        </div>
+
+                        <!-- Advanced Options -->
+                        <details class="advanced-options">
+                            <summary data-i18n="advanced-options">Advanced Options</summary>
+                            <div class="advanced-content">
+                                <div class="form-group checkbox-group">
+                                    <label>
+                                        <input type="checkbox" id="show-word-list" checked>
+                                        <span data-i18n="show-word-list">Show word list on puzzle</span>
+                                    </label>
+                                </div>
+                                <div class="form-group checkbox-group">
+                                    <label>
+                                        <input type="checkbox" id="uppercase-only" checked>
+                                        <span data-i18n="uppercase-only">Uppercase letters only</span>
+                                    </label>
+                                </div>
+                                <div class="form-group checkbox-group">
+                                    <label>
+                                        <input type="checkbox" id="generate-answer-key" checked>
+                                        <span data-i18n="generate-answer-key">Generate answer key</span>
+                                    </label>
+                                </div>
+                                <div class="form-group">
+                                    <label for="hidden-message" data-i18n="hidden-message">Hidden Message (optional):</label>
+                                    <input type="text" id="hidden-message" placeholder="Secret message appears in unused letters">
+                                    <small data-i18n="hidden-message-hint">Unused grid spaces will spell out this message!</small>
+                                </div>
+                                <div class="form-group">
+                                    <label for="fill-letters" data-i18n="fill-letters">Fill Letters:</label>
+                                    <select id="fill-letters">
+                                        <option value="random">Random (A-Z)</option>
+                                        <option value="vowels">Vowels Heavy</option>
+                                        <option value="consonants">Consonants Heavy</option>
+                                        <option value="similar">Similar to Words</option>
+                                    </select>
+                                </div>
+                            </div>
+                        </details>
+
+                        <!-- Generate Button -->
+                        <button id="generate-btn" class="primary-btn">
+                            <span class="btn-icon">✨</span>
+                            <span data-i18n="generate-puzzle">Generate Puzzle</span>
+                        </button>
+                    </div>
+
+                    <!-- Preview Panel -->
+                    <div class="preview-panel">
+                        <div class="preview-header">
+                            <h3 data-i18n="preview">Preview</h3>
+                            <div class="preview-actions">
+                                <button id="regenerate-btn" class="icon-btn" title="Regenerate">🔄</button>
+                                <button id="print-btn" class="icon-btn" title="Print">🖨️</button>
+                                <button id="download-btn" class="icon-btn" title="Download PDF">📥</button>
+                            </div>
+                        </div>
+                        <div id="puzzle-preview" class="puzzle-preview">
+                            <div class="empty-preview">
+                                <span class="empty-icon">🔍</span>
+                                <p data-i18n="preview-empty">Enter words and click "Generate Puzzle" to create your word search!</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- About Tab -->
+            <section id="about-tab" class="tab-content">
+                <div class="about-content">
+                    <h2>About Word Search Maker</h2>
+                    <div class="about-grid">
+                        <div class="about-card">
+                            <span class="about-icon">🎯</span>
+                            <h3>Difficulty Levels</h3>
+                            <ul>
+                                <li><strong>Easy:</strong> Words go horizontal & vertical only</li>
+                                <li><strong>Normal:</strong> Adds diagonal directions</li>
+                                <li><strong>Medium:</strong> Words can go backwards too</li>
+                                <li><strong>Hard:</strong> All directions, tricky letter fills</li>
+                                <li><strong>Extreme:</strong> Maximum challenge, hidden word list</li>
+                            </ul>
+                        </div>
+                        <div class="about-card">
+                            <span class="about-icon">🌍</span>
+                            <h3>Languages</h3>
+                            <p>Create puzzles in English, Spanish, French, German, Portuguese, and Italian!</p>
+                        </div>
+                        <div class="about-card">
+                            <span class="about-icon">✨</span>
+                            <h3>Special Features</h3>
+                            <ul>
+                                <li>Hidden message mode</li>
+                                <li>Multiple shapes</li>
+                                <li>Themed backgrounds</li>
+                                <li>Print-ready output</li>
+                                <li>Answer key generation</li>
+                            </ul>
+                        </div>
+                        <div class="about-card">
+                            <span class="about-icon">📖</span>
+                            <h3>Bible Templates</h3>
+                            <p>Special collection of faith-based word searches for kids, available in English and Spanish!</p>
+                        </div>
+                    </div>
+                </div>
+            </section>
+        </main>
+
+        <!-- Puzzle Modal (for viewing/printing) -->
+        <div id="puzzle-modal" class="modal">
+            <div class="modal-content">
+                <button class="modal-close">&times;</button>
+                <div id="modal-puzzle-container" class="modal-puzzle-container">
+                    <!-- Puzzle will be rendered here -->
+                </div>
+                <div class="modal-actions">
+                    <button id="modal-print-btn" class="primary-btn">
+                        <span>🖨️</span> Print Puzzle
+                    </button>
+                    <button id="modal-print-answer-btn" class="secondary-btn">
+                        <span>📋</span> Print with Answers
+                    </button>
+                </div>
+            </div>
+        </div>
+
+        <!-- Print Container (hidden, used for printing) -->
+        <div id="print-container" class="print-container"></div>
+
+        <!-- Footer -->
+        <footer class="footer">
+            <p>Made with ❤️ for puzzle lovers everywhere</p>
+        </footer>
+    </div>
+
+    <script src="templates.js"></script>
+    <script src="generator.js"></script>
+    <script src="app.js"></script>
+</body>
+</html>
