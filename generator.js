@@ -671,8 +671,27 @@ class PuzzleRenderer {
         // Get direction hints based on difficulty
         const directionHints = this.getDirectionHints();
 
+        // Calculate dynamic sizing based on grid size and word count
+        const gridSize = this.puzzle.size;
+        const wordCount = this.puzzle.placedWords.length;
+
+        // Calculate cell size to fit grid on page (max ~6.5 inches = ~468px for grid)
+        // Leave room for title, subtitle, and word list
+        const maxGridWidth = 468;
+        const cellSize = Math.min(42, Math.floor(maxGridWidth / gridSize));
+
+        // Determine word list columns based on word count
+        let wordColumns = 4;
+        if (wordCount > 20) wordColumns = 5;
+        if (wordCount > 30) wordColumns = 6;
+
+        // Determine sizing class based on content density
+        let sizeClass = '';
+        if (gridSize >= 15 || wordCount > 20) sizeClass = 'print-compact';
+        if (gridSize >= 18 || wordCount > 30) sizeClass = 'print-dense';
+
         let html = `
-            <div class="print-page">
+            <div class="print-page ${sizeClass}" style="--cell-size: ${cellSize}px; --word-columns: ${wordColumns};">
                 <h1 class="print-puzzle-title">${this.escapeHtml(this.title)}</h1>
                 <p class="print-puzzle-subtitle">— WORD SEARCH —</p>
                 <div class="print-grid">
@@ -763,7 +782,7 @@ class PuzzleRenderer {
         // Answer key page
         if (includeAnswers) {
             html += `
-                <div class="print-page">
+                <div class="print-page ${sizeClass}" style="--cell-size: ${cellSize}px; --word-columns: ${wordColumns};">
                     <h2 class="print-answer-key-title">ANSWER KEY</h2>
                     <p class="print-puzzle-subtitle">${this.escapeHtml(this.title)}</p>
                     <div class="print-grid">
