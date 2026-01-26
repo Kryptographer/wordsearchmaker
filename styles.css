@@ -28,8 +28,8 @@
     --radius-lg: 16px;
     --radius-xl: 24px;
 
-    --font-main: 'Nunito', -apple-system, BlinkMacSystemFont, sans-serif;
-    --font-display: 'Fredoka One', cursive;
+    --font-main: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
+    --font-display: 'Arial Black', 'Helvetica Neue', Arial, sans-serif;
 
     --transition: all 0.2s ease;
 }
@@ -961,17 +961,209 @@ body {
 /* ========================================
    Print Styles
    ======================================== */
+
+/* Print container - hidden on screen, shown when printing */
 .print-container {
     display: none;
 }
 
+/* Print element styles - defined outside @media print for reliable rendering */
+.print-page {
+    padding: 20px;
+    background: white;
+    page-break-after: always;
+}
+
+.print-page:last-child {
+    page-break-after: avoid;
+}
+
+.print-puzzle-title {
+    font-family: 'Arial Black', 'Helvetica Neue', Arial, sans-serif;
+    font-size: 28pt;
+    font-weight: bold;
+    text-align: center;
+    margin-bottom: 10px;
+    color: #000;
+}
+
+.print-puzzle-subtitle {
+    text-align: center;
+    font-size: 12pt;
+    color: #666;
+    margin-bottom: 20px;
+}
+
+.print-grid {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin-bottom: 30px;
+}
+
+.print-row {
+    display: flex;
+}
+
+.print-cell {
+    width: 26px;
+    height: 26px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-family: 'Courier New', Courier, monospace;
+    font-size: 14pt;
+    font-weight: bold;
+    border: 1px solid #333;
+    color: #000;
+    background: white;
+}
+
+.print-cell.hidden {
+    visibility: hidden;
+    border: none;
+}
+
+.print-cell.highlighted {
+    background: #ccc !important;
+    -webkit-print-color-adjust: exact !important;
+    print-color-adjust: exact !important;
+}
+
+.print-word-list {
+    text-align: center;
+    margin-top: 30px;
+    padding: 20px;
+    border: 2px solid #333;
+    border-radius: 10px;
+    max-width: 600px;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+.print-word-list-title {
+    font-family: 'Arial Black', 'Helvetica Neue', Arial, sans-serif;
+    font-size: 16pt;
+    font-weight: bold;
+    margin-bottom: 15px;
+    color: #000;
+}
+
+.print-words {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 12px 20px;
+    font-size: 12pt;
+    font-family: 'Arial', sans-serif;
+}
+
+.print-word {
+    padding: 5px 15px;
+    border: 1px solid #666;
+    border-radius: 20px;
+    font-weight: 600;
+    color: #000;
+}
+
+.print-answer-key-title {
+    font-family: 'Arial Black', 'Helvetica Neue', Arial, sans-serif;
+    font-size: 20pt;
+    font-weight: bold;
+    text-align: center;
+    margin-bottom: 15px;
+    margin-top: 30px;
+    color: #000;
+}
+
+.print-difficulty {
+    text-align: center;
+    font-size: 11pt;
+    margin-bottom: 15px;
+}
+
+.print-difficulty-badge {
+    padding: 4px 12px;
+    border-radius: 15px;
+    font-weight: bold;
+    border: 1px solid #666;
+}
+
+/* Print Categorized Word List */
+.print-word-list-categorized {
+    text-align: left;
+    max-width: 650px;
+    margin: 30px auto;
+    padding: 20px;
+    border: 2px solid #333;
+    border-radius: 10px;
+}
+
+.print-word-categories {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 20px;
+}
+
+.print-word-category {
+    break-inside: avoid;
+}
+
+.print-category-title {
+    font-family: 'Arial Black', 'Helvetica Neue', Arial, sans-serif;
+    font-size: 11pt;
+    font-weight: bold;
+    margin-bottom: 8px;
+    padding-bottom: 4px;
+    border-bottom: 2px solid #333;
+    color: #000;
+}
+
+.print-category-words {
+    list-style: disc;
+    padding-left: 20px;
+    margin: 0;
+}
+
+.print-word-bullet {
+    padding: 3px 0;
+    font-size: 11pt;
+    font-family: 'Arial', sans-serif;
+    color: #000;
+}
+
+/* Print instructions section */
+.print-instructions {
+    text-align: center;
+    font-size: 10pt;
+    color: #444;
+    margin: 10px auto 20px auto;
+    font-style: italic;
+    max-width: 500px;
+}
+
+.print-puzzle-subtitle {
+    text-align: center;
+    font-size: 14pt;
+    color: #333;
+    margin-bottom: 15px;
+    font-weight: normal;
+}
+
 @media print {
-    body {
-        background: white !important;
+    /* Reset everything for print */
+    * {
         -webkit-print-color-adjust: exact !important;
         print-color-adjust: exact !important;
     }
 
+    body {
+        background: white !important;
+        margin: 0 !important;
+        padding: 0 !important;
+    }
+
+    /* Hide the app UI when printing */
     .app-container,
     .header,
     .main-content,
@@ -980,146 +1172,30 @@ body {
         display: none !important;
     }
 
+    /* Show print container when printing */
     .print-container {
         display: block !important;
+        position: static !important;
+        visibility: visible !important;
     }
 
     .print-page {
         page-break-after: always;
-        padding: 20px;
+        margin: 0;
+        padding: 15mm;
     }
 
     .print-page:last-child {
         page-break-after: avoid;
     }
 
-    .print-puzzle-title {
-        font-family: var(--font-display);
-        font-size: 28pt;
-        text-align: center;
-        margin-bottom: 10px;
-    }
-
-    .print-puzzle-subtitle {
-        text-align: center;
-        font-size: 12pt;
-        color: #666;
-        margin-bottom: 20px;
-    }
-
-    .print-grid {
-        display: flex;
-        flex-direction: column;
-        align-items: center;
-        margin-bottom: 30px;
-    }
-
-    .print-row {
-        display: flex;
-    }
-
+    /* Ensure grid cells print correctly */
     .print-cell {
-        width: 24px;
-        height: 24px;
-        display: flex;
-        align-items: center;
-        justify-content: center;
-        font-family: 'Courier New', monospace;
-        font-size: 14pt;
-        font-weight: bold;
-        border: 1px solid #ddd;
-    }
-
-    .print-cell.hidden {
-        visibility: hidden;
-        border: none;
+        border: 1px solid #333 !important;
     }
 
     .print-cell.highlighted {
-        background: #ddd !important;
-        -webkit-print-color-adjust: exact !important;
-    }
-
-    .print-word-list {
-        text-align: center;
-        margin-top: 20px;
-    }
-
-    .print-word-list-title {
-        font-family: var(--font-display);
-        font-size: 16pt;
-        margin-bottom: 15px;
-    }
-
-    .print-words {
-        display: flex;
-        flex-wrap: wrap;
-        justify-content: center;
-        gap: 15px;
-        font-size: 12pt;
-    }
-
-    .print-word {
-        padding: 5px 15px;
-        border: 1px solid #ccc;
-        border-radius: 20px;
-    }
-
-    .print-answer-key-title {
-        font-family: var(--font-display);
-        font-size: 20pt;
-        text-align: center;
-        margin-bottom: 15px;
-        margin-top: 30px;
-    }
-
-    .print-difficulty {
-        text-align: center;
-        font-size: 11pt;
-        margin-bottom: 15px;
-    }
-
-    .print-difficulty-badge {
-        padding: 4px 12px;
-        border-radius: 15px;
-        font-weight: bold;
-    }
-
-    /* Print Categorized Word List */
-    .print-word-list-categorized {
-        text-align: left;
-        max-width: 600px;
-        margin: 20px auto;
-    }
-
-    .print-word-categories {
-        display: grid;
-        grid-template-columns: repeat(2, 1fr);
-        gap: 20px;
-    }
-
-    .print-word-category {
-        break-inside: avoid;
-    }
-
-    .print-category-title {
-        font-family: var(--font-display);
-        font-size: 11pt;
-        font-weight: bold;
-        margin-bottom: 8px;
-        padding-bottom: 4px;
-        border-bottom: 1px solid #ccc;
-    }
-
-    .print-category-words {
-        list-style: disc;
-        padding-left: 20px;
-        margin: 0;
-    }
-
-    .print-word-bullet {
-        padding: 2px 0;
-        font-size: 10pt;
+        background: #ccc !important;
     }
 }
 

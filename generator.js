@@ -411,6 +411,24 @@ class PuzzleRenderer {
     }
 
     /**
+     * Get direction hints for print instructions based on difficulty
+     */
+    getDirectionHints() {
+        switch (this.difficulty) {
+            case 'easy':
+                return 'horizontally and vertically';
+            case 'normal':
+                return 'horizontally, vertically, and diagonally';
+            case 'medium':
+            case 'hard':
+            case 'extreme':
+                return 'horizontally, vertically, diagonally, and backwards';
+            default:
+                return 'horizontally, vertically, and diagonally';
+        }
+    }
+
+    /**
      * Render the puzzle to HTML
      */
     render() {
@@ -513,17 +531,23 @@ class PuzzleRenderer {
     }
 
     /**
-     * Render for printing
+     * Render for printing - Traditional word search format
      */
     renderForPrint(includeAnswers = false) {
         const diffInfo = this.getDifficultyInfo();
+
+        // Get direction hints based on difficulty
+        const directionHints = this.getDirectionHints();
 
         let html = `
             <div class="print-page">
                 <h1 class="print-puzzle-title">${this.escapeHtml(this.title)}</h1>
                 <div class="print-difficulty">
-                    <span class="print-difficulty-badge">${diffInfo.emoji} ${diffInfo.label}</span>
+                    <span class="print-difficulty-badge">${diffInfo.label} - ${this.puzzle.placedWords.length} Words</span>
                 </div>
+                <p class="print-instructions">
+                    Find and circle all the words listed below. Words may be hidden ${directionHints}.
+                </p>
                 <div class="print-grid">
         `;
 
@@ -564,7 +588,7 @@ class PuzzleRenderer {
             if (this.wordCategories && Object.keys(this.wordCategories).length > 0) {
                 html += `
                     <div class="print-word-list print-word-list-categorized">
-                        <h3 class="print-word-list-title">Find These Words:</h3>
+                        <h3 class="print-word-list-title">WORD LIST</h3>
                         <div class="print-word-categories">
                             ${Object.entries(this.wordCategories).map(([category, words]) => {
                                 // Only show words that were actually placed in the puzzle
@@ -589,7 +613,7 @@ class PuzzleRenderer {
             } else {
                 html += `
                     <div class="print-word-list">
-                        <h3 class="print-word-list-title">Find These Words:</h3>
+                        <h3 class="print-word-list-title">WORD LIST</h3>
                         <div class="print-words">
                             ${this.puzzle.placedWords.map(word =>
                                 `<span class="print-word">${word}</span>`
@@ -598,6 +622,13 @@ class PuzzleRenderer {
                     </div>
                 `;
             }
+        } else if (this.difficulty === 'extreme') {
+            html += `
+                <div class="print-word-list">
+                    <h3 class="print-word-list-title">EXTREME CHALLENGE!</h3>
+                    <p class="print-instructions">Find all ${this.puzzle.placedWords.length} hidden words without a word list!</p>
+                </div>
+            `;
         }
 
         html += '</div>';
@@ -606,7 +637,9 @@ class PuzzleRenderer {
         if (includeAnswers) {
             html += `
                 <div class="print-page">
-                    <h2 class="print-answer-key-title">Answer Key - ${this.escapeHtml(this.title)}</h2>
+                    <h2 class="print-answer-key-title">ANSWER KEY</h2>
+                    <h3 class="print-puzzle-subtitle" style="text-align: center; margin-bottom: 20px;">${this.escapeHtml(this.title)}</h3>
+                    <p class="print-instructions">Shaded cells show the location of each word.</p>
                     <div class="print-grid">
             `;
 
@@ -636,7 +669,7 @@ class PuzzleRenderer {
             if (this.wordCategories && Object.keys(this.wordCategories).length > 0) {
                 html += `
                     <div class="print-word-list print-word-list-categorized">
-                        <h3 class="print-word-list-title">Words Found:</h3>
+                        <h3 class="print-word-list-title">WORDS (${this.puzzle.placedWords.length} Total)</h3>
                         <div class="print-word-categories">
                             ${Object.entries(this.wordCategories).map(([category, words]) => {
                                 const placedInCategory = words.filter(w =>
@@ -660,7 +693,7 @@ class PuzzleRenderer {
             } else {
                 html += `
                     <div class="print-word-list">
-                        <h3 class="print-word-list-title">Words Found:</h3>
+                        <h3 class="print-word-list-title">WORDS (${this.puzzle.placedWords.length} Total)</h3>
                         <div class="print-words">
                             ${this.puzzle.placedWords.map(word =>
                                 `<span class="print-word">${word}</span>`
