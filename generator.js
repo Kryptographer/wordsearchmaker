@@ -675,8 +675,8 @@ class PuzzleRenderer {
         const gridSize = this.puzzle.size;
         const wordCount = this.puzzle.placedWords.length;
 
-        // Maximize grid to fill page width
-        const maxGridWidth = 540;
+        // Maximize grid to fill page - use larger cells
+        const maxGridWidth = 580;
         const cellSize = Math.floor(maxGridWidth / gridSize);
 
         // Word list columns
