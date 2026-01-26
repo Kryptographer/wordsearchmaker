@@ -742,7 +742,7 @@ class PuzzleRenderer {
             if (this.wordCategories && Object.keys(this.wordCategories).length > 0) {
                 html += `
                     <div class="print-word-list print-word-list-categorized">
-                        <h3 class="print-word-list-title">WORD LIST</h3>
+                        <h3 class="print-word-list-title">${this.getFindWordsTitle()}</h3>
                         <div class="print-word-categories">
                             ${Object.entries(this.wordCategories).map(([category, words]) => {
                                 // Only show words that were actually placed in the puzzle
@@ -769,7 +769,7 @@ class PuzzleRenderer {
                 const sortedWords = [...this.puzzle.placedWords].sort();
                 html += `
                     <div class="print-word-list">
-                        <h3 class="print-word-list-title">WORD LIST</h3>
+                        <h3 class="print-word-list-title">${this.getFindWordsTitle()}</h3>
                         <div class="print-words">
                             ${sortedWords.map(word =>
                                 `<span class="print-word">${word}</span>`
