@@ -218,7 +218,8 @@ class WordSearchApp {
             theme: 'classic',
             showWordList: template.difficulty !== 'extreme',
             difficulty: template.difficulty,
-            wordCategories: template.wordCategories || null
+            wordCategories: template.wordCategories || null,
+            language: template.language || 'en'
         };
 
         // Show warning if any template words were blocked (shouldn't happen for curated templates)
@@ -557,7 +558,9 @@ class WordSearchApp {
 
             ctx.font = 'bold 16px Fredoka One, sans-serif';
             ctx.fillStyle = '#1e293b';
-            ctx.fillText('Find These Words:', canvas.width / 2, wordListY);
+            const puzzleLang = this.currentPuzzleOptions.language || 'en';
+            const findWordsText = (I18N[puzzleLang] && I18N[puzzleLang]['find-words']) || I18N.en['find-words'];
+            ctx.fillText(findWordsText, canvas.width / 2, wordListY);
 
             ctx.font = '12px Nunito, sans-serif';
             const words = this.currentPuzzle.placedWords;
