@@ -455,8 +455,12 @@ class WordSearchApp {
         const printContainer = document.getElementById('print-container');
         printContainer.innerHTML = renderer.renderForPrint(includeAnswers);
 
-        // Trigger print
-        window.print();
+        // Use requestAnimationFrame to ensure content is rendered before printing
+        requestAnimationFrame(() => {
+            requestAnimationFrame(() => {
+                window.print();
+            });
+        });
     }
 
     /**
