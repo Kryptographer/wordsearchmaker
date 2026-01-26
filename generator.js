@@ -531,23 +531,16 @@ class PuzzleRenderer {
     }
 
     /**
-     * Render for printing - Traditional word search format
+     * Render for printing - Clean, printer-friendly format
      */
     renderForPrint(includeAnswers = false) {
-        const diffInfo = this.getDifficultyInfo();
-
         // Get direction hints based on difficulty
         const directionHints = this.getDirectionHints();
 
         let html = `
             <div class="print-page">
                 <h1 class="print-puzzle-title">${this.escapeHtml(this.title)}</h1>
-                <div class="print-difficulty">
-                    <span class="print-difficulty-badge">${diffInfo.label} - ${this.puzzle.placedWords.length} Words</span>
-                </div>
-                <p class="print-instructions">
-                    Find and circle all the words listed below. Words may be hidden ${directionHints}.
-                </p>
+                <p class="print-puzzle-subtitle">— WORD SEARCH —</p>
                 <div class="print-grid">
         `;
 
@@ -573,9 +566,7 @@ class PuzzleRenderer {
                     isHighlighted ? 'highlighted' : ''
                 ].filter(Boolean).join(' ');
 
-                html += `<div class="${cellClass}">
-                    ${isActive ? this.puzzle.grid[y][x] : ''}
-                </div>`;
+                html += `<div class="${cellClass}">${isActive ? this.puzzle.grid[y][x] : ''}</div>`;
             }
             html += '</div>';
         }
@@ -611,11 +602,13 @@ class PuzzleRenderer {
                     </div>
                 `;
             } else {
+                // Sort words alphabetically for cleaner presentation
+                const sortedWords = [...this.puzzle.placedWords].sort();
                 html += `
                     <div class="print-word-list">
                         <h3 class="print-word-list-title">WORD LIST</h3>
                         <div class="print-words">
-                            ${this.puzzle.placedWords.map(word =>
+                            ${sortedWords.map(word =>
                                 `<span class="print-word">${word}</span>`
                             ).join('')}
                         </div>
@@ -625,7 +618,7 @@ class PuzzleRenderer {
         } else if (this.difficulty === 'extreme') {
             html += `
                 <div class="print-word-list">
-                    <h3 class="print-word-list-title">EXTREME CHALLENGE!</h3>
+                    <h3 class="print-word-list-title">EXTREME CHALLENGE</h3>
                     <p class="print-instructions">Find all ${this.puzzle.placedWords.length} hidden words without a word list!</p>
                 </div>
             `;
@@ -638,8 +631,7 @@ class PuzzleRenderer {
             html += `
                 <div class="print-page">
                     <h2 class="print-answer-key-title">ANSWER KEY</h2>
-                    <h3 class="print-puzzle-subtitle" style="text-align: center; margin-bottom: 20px;">${this.escapeHtml(this.title)}</h3>
-                    <p class="print-instructions">Shaded cells show the location of each word.</p>
+                    <p class="print-puzzle-subtitle">${this.escapeHtml(this.title)}</p>
                     <div class="print-grid">
             `;
 
@@ -654,9 +646,7 @@ class PuzzleRenderer {
                         isHighlighted ? 'highlighted' : ''
                     ].filter(Boolean).join(' ');
 
-                    html += `<div class="${cellClass}">
-                        ${isActive ? this.puzzle.grid[y][x] : ''}
-                    </div>`;
+                    html += `<div class="${cellClass}">${isActive ? this.puzzle.grid[y][x] : ''}</div>`;
                 }
                 html += '</div>';
             }
@@ -691,11 +681,12 @@ class PuzzleRenderer {
                     </div>
                 `;
             } else {
+                const sortedWords = [...this.puzzle.placedWords].sort();
                 html += `
                     <div class="print-word-list">
                         <h3 class="print-word-list-title">WORDS (${this.puzzle.placedWords.length} Total)</h3>
                         <div class="print-words">
-                            ${this.puzzle.placedWords.map(word =>
+                            ${sortedWords.map(word =>
                                 `<span class="print-word">${word}</span>`
                             ).join('')}
                         </div>
