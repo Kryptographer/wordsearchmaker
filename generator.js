@@ -528,6 +528,22 @@ class PuzzleRenderer {
         this.showAnswers = options.showAnswers || false;
         this.difficulty = options.difficulty || 'normal';
         this.wordCategories = options.wordCategories || null;
+        this.language = options.language || 'en';
+    }
+
+    /**
+     * Get translated string for "Find These Words:"
+     */
+    getFindWordsTitle() {
+        const translations = {
+            en: 'Find These Words:',
+            es: 'Encuentra Estas Palabras:',
+            fr: 'Trouvez Ces Mots:',
+            de: 'Finde Diese Wörter:',
+            pt: 'Encontre Estas Palavras:',
+            it: 'Trova Queste Parole:'
+        };
+        return translations[this.language] || translations.en;
     }
 
     /**
@@ -616,7 +632,7 @@ class PuzzleRenderer {
             if (this.wordCategories && Object.keys(this.wordCategories).length > 0) {
                 html += `
                     <div class="word-list-container word-list-categorized">
-                        <h3 class="word-list-title">Find These Words:</h3>
+                        <h3 class="word-list-title">${this.getFindWordsTitle()}</h3>
                         <div class="word-categories">
                             ${Object.entries(this.wordCategories).map(([category, words]) => {
                                 // Only show words that were actually placed in the puzzle
@@ -641,7 +657,7 @@ class PuzzleRenderer {
             } else {
                 html += `
                     <div class="word-list-container">
-                        <h3 class="word-list-title">Find These Words:</h3>
+                        <h3 class="word-list-title">${this.getFindWordsTitle()}</h3>
                         <div class="word-list">
                             ${this.puzzle.placedWords.map(word =>
                                 `<span class="word-item">${word}</span>`

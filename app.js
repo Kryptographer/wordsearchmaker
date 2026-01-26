@@ -53,7 +53,6 @@ class WordSearchApp {
         document.getElementById('print-btn').addEventListener('click', () => this.printPuzzle(false));
         document.getElementById('print-answer-btn').addEventListener('click', () => this.printPuzzle(true));
         document.getElementById('download-btn').addEventListener('click', () => this.downloadPuzzle());
-        document.getElementById('download-pdf-btn').addEventListener('click', () => this.downloadPuzzleAsPDF());
 
         // Modal buttons
         document.getElementById('modal-print-btn').addEventListener('click', () => this.printPuzzle(false));
@@ -274,6 +273,7 @@ class WordSearchApp {
         const shape = document.getElementById('grid-shape').value;
         const difficulty = document.getElementById('difficulty-select').value;
         const theme = document.getElementById('theme-select').value;
+        const puzzleLanguage = document.getElementById('puzzle-language').value;
         const showWordList = document.getElementById('show-word-list').checked;
         const uppercase = document.getElementById('uppercase-only').checked;
         const hiddenMessage = document.getElementById('hidden-message').value;
@@ -294,7 +294,7 @@ class WordSearchApp {
             hiddenMessage,
             fillType,
             uppercase,
-            language: this.currentLanguage
+            language: puzzleLanguage
         });
 
         this.currentPuzzle = generator.generate();
@@ -302,7 +302,8 @@ class WordSearchApp {
             title,
             theme,
             showWordList,
-            difficulty
+            difficulty,
+            language: puzzleLanguage
         };
 
         // Show warning if some words couldn't be placed
@@ -577,32 +578,6 @@ class WordSearchApp {
         link.download = `${this.currentPuzzleOptions.title.replace(/[^a-z0-9]/gi, '_')}_word_search.png`;
         link.href = canvas.toDataURL('image/png');
         link.click();
-    }
-
-    /**
-     * Download puzzle as PDF (uses browser print-to-PDF)
-     */
-    downloadPuzzleAsPDF(includeAnswers = true) {
-        if (!this.currentPuzzle) return;
-
-        // Show toast with instructions
-        this.showToast('Select "Save as PDF" in the print dialog to download as PDF', 'info');
-
-        // Use the same print mechanism - browsers support "Save as PDF"
-        const renderer = new PuzzleRenderer(this.currentPuzzle, {
-            ...this.currentPuzzleOptions,
-            showAnswers: includeAnswers
-        });
-
-        const printContainer = document.getElementById('print-container');
-        printContainer.innerHTML = renderer.renderForPrint(includeAnswers);
-
-        // Use requestAnimationFrame to ensure content is rendered before printing
-        requestAnimationFrame(() => {
-            requestAnimationFrame(() => {
-                window.print();
-            });
-        });
     }
 
     /**
