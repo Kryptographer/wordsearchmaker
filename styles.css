@@ -969,7 +969,7 @@ body {
 
 /* Print element styles - defined outside @media print for reliable rendering */
 .print-page {
-    padding: 15mm;
+    padding: 10mm 12mm;
     background: white;
     page-break-after: always;
     max-width: 8.5in;
@@ -982,10 +982,11 @@ body {
 
 .print-puzzle-title {
     font-family: 'Arial Black', 'Helvetica Neue', Arial, sans-serif;
-    font-size: 32pt;
+    font-size: 28pt;
     font-weight: 900;
     text-align: center;
-    margin-bottom: 5px;
+    margin-bottom: 2px;
+    margin-top: 0;
     color: #000;
     text-transform: uppercase;
     letter-spacing: 2px;
@@ -993,9 +994,9 @@ body {
 
 .print-puzzle-subtitle {
     text-align: center;
-    font-size: 11pt;
+    font-size: 10pt;
     color: #000;
-    margin-bottom: 20px;
+    margin-bottom: 10px;
     font-weight: normal;
     letter-spacing: 2px;
 }
@@ -1005,21 +1006,23 @@ body {
     display: flex;
     flex-direction: column;
     align-items: center;
-    margin: 25px auto 35px auto;
+    margin: 15px auto 25px auto;
+    width: 100%;
 }
 
 .print-row {
     display: flex;
+    justify-content: center;
 }
 
 .print-cell {
-    width: 28px;
-    height: 32px;
+    width: 38px;
+    height: 38px;
     display: flex;
     align-items: center;
     justify-content: center;
     font-family: Arial, Helvetica, sans-serif;
-    font-size: 15pt;
+    font-size: 16pt;
     font-weight: bold;
     color: #000;
     background: transparent;
@@ -1040,7 +1043,7 @@ body {
 /* Simple word list - no box, multi-column layout */
 .print-word-list {
     text-align: center;
-    margin-top: 30px;
+    margin-top: 20px;
     padding: 0;
     border: none;
     max-width: 100%;
@@ -1050,13 +1053,13 @@ body {
 
 .print-word-list-title {
     font-family: Arial, Helvetica, sans-serif;
-    font-size: 12pt;
+    font-size: 11pt;
     font-weight: bold;
-    margin-bottom: 12px;
+    margin-bottom: 10px;
     color: #000;
     text-transform: uppercase;
     letter-spacing: 1px;
-    padding-bottom: 5px;
+    padding-bottom: 3px;
     border-bottom: 1px solid #000;
     display: inline-block;
 }
@@ -1110,30 +1113,31 @@ body {
 /* Print Categorized Word List - cleaner format */
 .print-word-list-categorized {
     text-align: left;
-    max-width: 100%;
-    margin: 30px auto 0 auto;
-    padding: 0;
+    width: 100%;
+    margin: 20px auto 0 auto;
+    padding: 0 10px;
     border: none;
+    box-sizing: border-box;
 }
 
 .print-word-categories {
     display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
-    gap: 15px 40px;
-    max-width: 650px;
-    margin: 0 auto;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 10px 25px;
+    width: 100%;
 }
 
 .print-word-category {
     break-inside: avoid;
+    min-width: 0;
 }
 
 .print-category-title {
     font-family: Arial, Helvetica, sans-serif;
-    font-size: 10pt;
+    font-size: 9pt;
     font-weight: bold;
-    margin-bottom: 5px;
-    padding-bottom: 3px;
+    margin-bottom: 4px;
+    padding-bottom: 2px;
     border-bottom: 1px solid #000;
     color: #000;
     text-transform: uppercase;
@@ -1146,8 +1150,8 @@ body {
 }
 
 .print-word-bullet {
-    padding: 2px 0;
-    font-size: 10pt;
+    padding: 1px 0;
+    font-size: 9pt;
     font-family: Arial, Helvetica, sans-serif;
     color: #000;
 }
