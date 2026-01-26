@@ -2,36 +2,51 @@
    Word Search Maker - Styles
    ======================================== */
 
-/* CSS Variables - Minimalist Theme inspired by midlife.engineering */
+/* CSS Variables - Dark Tropical Theme */
 :root {
-    --primary-color: #FF611A;
-    --primary-dark: #E55515;
-    --primary-light: #FF7A3D;
-    --secondary-color: #262626;
-    --success-color: #10b981;
-    --danger-color: #ef4444;
-    --warning-color: #FF611A;
+    /* Primary: Warm coral/salmon - tropical flowers & sunset */
+    --primary-color: #F7A072;
+    --primary-dark: #E8895A;
+    --primary-light: #FFBC99;
 
-    --bg-color: #FAFAFA;
-    --card-bg: #ffffff;
-    --text-color: #262626;
-    --text-light: #666666;
-    --border-color: #E5E5E5;
+    /* Secondary: Deep teal - tropical ocean */
+    --secondary-color: #0D9488;
 
-    --shadow-sm: 0 1px 2px rgba(0, 0, 0, 0.04);
-    --shadow-md: 0 2px 8px rgba(0, 0, 0, 0.06);
-    --shadow-lg: 0 4px 16px rgba(0, 0, 0, 0.08);
-    --shadow-xl: 0 8px 24px rgba(0, 0, 0, 0.1);
+    /* Status colors - softer for dark theme */
+    --success-color: #34D399;
+    --danger-color: #F87171;
+    --warning-color: #FBBF24;
 
-    --radius-sm: 4px;
-    --radius-md: 8px;
-    --radius-lg: 12px;
-    --radius-xl: 16px;
+    /* Dark tropical backgrounds */
+    --bg-color: #0F172A;
+    --bg-elevated: #1E293B;
+    --card-bg: #1E293B;
+
+    /* Text colors - warm cream tones */
+    --text-color: #F1F5F9;
+    --text-light: #94A3B8;
+    --text-muted: #64748B;
+
+    /* Borders - subtle blue-gray */
+    --border-color: #334155;
+    --border-light: #475569;
+
+    /* Shadows with tropical teal tint */
+    --shadow-sm: 0 1px 2px rgba(0, 0, 0, 0.3);
+    --shadow-md: 0 2px 8px rgba(0, 0, 0, 0.4);
+    --shadow-lg: 0 4px 16px rgba(0, 0, 0, 0.5);
+    --shadow-xl: 0 8px 24px rgba(0, 0, 0, 0.6);
+    --shadow-glow: 0 0 20px rgba(13, 148, 136, 0.15);
+
+    --radius-sm: 6px;
+    --radius-md: 10px;
+    --radius-lg: 14px;
+    --radius-xl: 18px;
 
     --font-main: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
     --font-display: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
 
-    --transition: all 0.15s ease;
+    --transition: all 0.2s ease;
 }
 
 /* Reset */
@@ -49,7 +64,7 @@ html {
 
 body {
     font-family: var(--font-main);
-    background: #FAFAFA;
+    background: var(--bg-color);
     min-height: 100vh;
     color: var(--text-color);
     line-height: 1.6;
@@ -69,7 +84,7 @@ body {
    Header
    ======================================== */
 .header {
-    background: var(--card-bg);
+    background: var(--bg-elevated);
     border-bottom: 1px solid var(--border-color);
     border-radius: 0;
     padding: 16px 32px;
@@ -77,7 +92,7 @@ body {
     align-items: center;
     justify-content: space-between;
     gap: 20px;
-    box-shadow: none;
+    box-shadow: var(--shadow-md);
     margin-bottom: 0;
     flex-wrap: wrap;
 }
@@ -158,7 +173,8 @@ body {
     font-size: 0.85rem;
     cursor: pointer;
     transition: var(--transition);
-    background: white;
+    background: var(--bg-color);
+    color: var(--text-color);
 }
 
 .language-selector select:focus {
@@ -250,7 +266,8 @@ body {
     cursor: pointer;
     transition: var(--transition);
     min-width: 130px;
-    background: white;
+    background: var(--bg-color);
+    color: var(--text-color);
 }
 
 .filter-group select:focus {
@@ -266,19 +283,19 @@ body {
 }
 
 .template-card {
-    background: white;
+    background: var(--card-bg);
     border-radius: var(--radius-md);
     overflow: hidden;
-    box-shadow: none;
+    box-shadow: var(--shadow-sm);
     transition: var(--transition);
     cursor: pointer;
     border: 1px solid var(--border-color);
 }
 
 .template-card:hover {
-    transform: translateY(-2px);
-    box-shadow: var(--shadow-md);
-    border-color: var(--primary-color);
+    transform: translateY(-3px);
+    box-shadow: var(--shadow-lg), var(--shadow-glow);
+    border-color: var(--secondary-color);
 }
 
 .template-preview {
@@ -289,14 +306,15 @@ body {
     font-size: 3rem;
     position: relative;
     overflow: hidden;
-    background: var(--bg-color);
+    background: linear-gradient(135deg, #1E3A5F 0%, #0F172A 100%);
 }
 
-.template-preview.bible { background: #FFF5EB; }
-.template-preview.holidays { background: #F0FDF4; }
-.template-preview.animals { background: #FDF2F8; }
-.template-preview.nature { background: #ECFDF5; }
-.template-preview.educational { background: #EFF6FF; }
+/* Dark tropical category backgrounds */
+.template-preview.bible { background: linear-gradient(135deg, #3D2F52 0%, #1E1B2E 100%); }
+.template-preview.holidays { background: linear-gradient(135deg, #1E4D3D 0%, #0F2922 100%); }
+.template-preview.animals { background: linear-gradient(135deg, #4A2C40 0%, #2D1A26 100%); }
+.template-preview.nature { background: linear-gradient(135deg, #1D4044 0%, #0F2527 100%); }
+.template-preview.educational { background: linear-gradient(135deg, #1E3A5F 0%, #0F1E33 100%); }
 
 .template-shape {
     position: absolute;
@@ -331,12 +349,13 @@ body {
     letter-spacing: 0.02em;
 }
 
-.badge-easy { background: #ECFDF5; color: #059669; }
-.badge-normal { background: #EFF6FF; color: #2563EB; }
-.badge-medium { background: #FFFBEB; color: #D97706; }
-.badge-hard { background: #FEF2F2; color: #DC2626; }
-.badge-extreme { background: #FDF2F8; color: #DB2777; }
-.badge-language { background: #F5F3FF; color: #7C3AED; }
+/* Dark tropical badge colors */
+.badge-easy { background: rgba(52, 211, 153, 0.2); color: #6EE7B7; }
+.badge-normal { background: rgba(56, 189, 248, 0.2); color: #7DD3FC; }
+.badge-medium { background: rgba(251, 191, 36, 0.2); color: #FCD34D; }
+.badge-hard { background: rgba(248, 113, 113, 0.2); color: #FCA5A5; }
+.badge-extreme { background: rgba(244, 114, 182, 0.2); color: #F9A8D4; }
+.badge-language { background: rgba(167, 139, 250, 0.2); color: #C4B5FD; }
 
 /* ========================================
    Custom Builder
@@ -355,11 +374,12 @@ body {
 }
 
 .builder-panel {
-    background: white;
+    background: var(--card-bg);
     padding: 24px;
     border-radius: var(--radius-md);
     border: 1px solid var(--border-color);
     height: fit-content;
+    box-shadow: var(--shadow-sm);
 }
 
 .builder-panel h2 {
@@ -393,7 +413,13 @@ body {
     font-family: var(--font-main);
     font-size: 0.9rem;
     transition: var(--transition);
-    background: white;
+    background: var(--bg-color);
+    color: var(--text-color);
+}
+
+.form-group input::placeholder,
+.form-group textarea::placeholder {
+    color: var(--text-muted);
 }
 
 .form-group input:focus,
@@ -487,7 +513,7 @@ body {
 
 .advanced-content {
     padding: 16px;
-    background: white;
+    background: var(--bg-elevated);
 }
 
 /* Buttons */
@@ -522,7 +548,7 @@ body {
 
 .secondary-btn {
     padding: 12px 20px;
-    background: white;
+    background: var(--bg-elevated);
     color: var(--text-color);
     border: 1px solid var(--border-color);
     border-radius: var(--radius-sm);
@@ -538,8 +564,8 @@ body {
 }
 
 .secondary-btn:hover {
-    background: var(--bg-color);
-    border-color: var(--text-color);
+    background: var(--border-color);
+    border-color: var(--border-light);
     color: var(--text-color);
 }
 
@@ -547,7 +573,7 @@ body {
     width: 40px;
     height: 40px;
     border: 1px solid var(--border-color);
-    background: white;
+    background: var(--bg-elevated);
     border-radius: var(--radius-sm);
     cursor: pointer;
     font-size: 1.1rem;
@@ -555,19 +581,20 @@ body {
     display: flex;
     align-items: center;
     justify-content: center;
+    color: var(--text-color);
 }
 
 .icon-btn:hover {
-    border-color: var(--text-color);
-    background: var(--bg-color);
+    border-color: var(--secondary-color);
+    background: var(--border-color);
 }
 
 /* Preview Panel */
 .preview-panel {
-    background: white;
+    background: var(--card-bg);
     border-radius: var(--radius-md);
     border: 1px solid var(--border-color);
-    box-shadow: none;
+    box-shadow: var(--shadow-sm);
     display: flex;
     flex-direction: column;
     overflow: hidden;
@@ -640,11 +667,11 @@ body {
 
 .puzzle-grid {
     display: inline-block;
-    background: white;
+    background: linear-gradient(145deg, #1E3A5F 0%, #162B46 100%);
     padding: 16px;
     border-radius: var(--radius-md);
     border: 1px solid var(--border-color);
-    box-shadow: none;
+    box-shadow: var(--shadow-md), var(--shadow-glow);
     margin-bottom: 24px;
 }
 
@@ -662,9 +689,10 @@ body {
     font-family: 'Courier New', monospace;
     font-size: 1.1rem;
     font-weight: 700;
-    border: 1px solid var(--border-color);
+    border: 1px solid rgba(148, 163, 184, 0.2);
     transition: var(--transition);
     user-select: none;
+    color: #E2E8F0;
 }
 
 .puzzle-cell.hidden {
@@ -673,13 +701,15 @@ body {
 }
 
 .puzzle-cell.highlighted {
-    background: var(--primary-light);
-    color: white;
+    background: var(--primary-color);
+    color: #1E293B;
+    border-color: var(--primary-color);
 }
 
 .puzzle-cell.found {
     background: var(--success-color);
-    color: white;
+    color: #1E293B;
+    border-color: var(--success-color);
 }
 
 /* Word List */
@@ -706,8 +736,8 @@ body {
 
 .word-item {
     padding: 6px 12px;
-    background: white;
-    border-radius: 4px;
+    background: var(--bg-elevated);
+    border-radius: 6px;
     font-weight: 500;
     font-size: 0.85rem;
     color: var(--text-color);
@@ -717,7 +747,7 @@ body {
 
 .word-item.found {
     background: var(--success-color);
-    color: white;
+    color: #1E293B;
     border-color: var(--success-color);
     text-decoration: line-through;
 }
@@ -739,7 +769,7 @@ body {
 }
 
 .word-category {
-    background: white;
+    background: var(--bg-elevated);
     padding: 14px 16px;
     border-radius: var(--radius-sm);
     border: 1px solid var(--border-color);
@@ -796,56 +826,79 @@ body {
     letter-spacing: 0.02em;
 }
 
-.difficulty-easy { background: #ECFDF5; color: #059669; }
-.difficulty-normal { background: #EFF6FF; color: #2563EB; }
-.difficulty-medium { background: #FFFBEB; color: #D97706; }
-.difficulty-hard { background: #FEF2F2; color: #DC2626; }
-.difficulty-extreme { background: #FDF2F8; color: #DB2777; }
+/* Dark tropical difficulty badges */
+.difficulty-easy { background: rgba(52, 211, 153, 0.2); color: #6EE7B7; }
+.difficulty-normal { background: rgba(56, 189, 248, 0.2); color: #7DD3FC; }
+.difficulty-medium { background: rgba(251, 191, 36, 0.2); color: #FCD34D; }
+.difficulty-hard { background: rgba(248, 113, 113, 0.2); color: #FCA5A5; }
+.difficulty-extreme { background: rgba(244, 114, 182, 0.2); color: #F9A8D4; }
 
 /* ========================================
-   Themed Puzzles
+   Themed Puzzles - Dark Tropical Variants
    ======================================== */
-.theme-classic .puzzle-grid { background: white; }
 
+/* Classic - Deep ocean blue */
+.theme-classic .puzzle-grid {
+    background: linear-gradient(145deg, #1E3A5F 0%, #162B46 100%);
+}
+.theme-classic .puzzle-cell {
+    color: #E2E8F0;
+    border-color: rgba(148, 163, 184, 0.2);
+}
+
+/* Colorful - Tropical sunset gradient */
 .theme-colorful .puzzle-grid {
-    background: linear-gradient(135deg, #fef3c7, #fbcfe8, #ddd6fe, #bfdbfe);
+    background: linear-gradient(135deg, #4C1D3D 0%, #1E3A5F 50%, #0D4F4F 100%);
+}
+.theme-colorful .puzzle-cell {
+    color: #FCD34D;
+    border-color: rgba(252, 211, 77, 0.2);
 }
 
+/* Nature - Lush palm forest */
 .theme-nature .puzzle-grid {
-    background: linear-gradient(135deg, #d1fae5, #a7f3d0);
+    background: linear-gradient(135deg, #134E4A 0%, #1E3A3A 100%);
+}
+.theme-nature .puzzle-cell {
+    color: #6EE7B7;
+    border-color: rgba(110, 231, 183, 0.2);
 }
 
+/* Ocean - Deep tropical waters */
 .theme-ocean .puzzle-grid {
-    background: linear-gradient(135deg, #0ea5e9, #06b6d4);
+    background: linear-gradient(135deg, #164E63 0%, #0F3D5C 100%);
 }
 .theme-ocean .puzzle-cell {
-    color: white;
-    border-color: rgba(255,255,255,0.3);
+    color: #67E8F9;
+    border-color: rgba(103, 232, 249, 0.2);
 }
 
+/* Space - Tropical night sky */
 .theme-space .puzzle-grid {
-    background: linear-gradient(135deg, #1e1b4b, #312e81);
+    background: linear-gradient(135deg, #1E1B4B 0%, #312E81 50%, #3D1D4F 100%);
 }
 .theme-space .puzzle-cell {
-    color: #fef08a;
-    border-color: rgba(254, 240, 138, 0.2);
+    color: #C4B5FD;
+    border-color: rgba(196, 181, 253, 0.2);
 }
 
+/* Candy - Hibiscus coral */
 .theme-candy .puzzle-grid {
-    background: linear-gradient(135deg, #f472b6, #fb7185);
+    background: linear-gradient(135deg, #831843 0%, #4C1D3D 100%);
 }
 .theme-candy .puzzle-cell {
-    color: white;
-    border-color: rgba(255,255,255,0.3);
+    color: #FCA5A5;
+    border-color: rgba(252, 165, 165, 0.2);
 }
 
+/* Chalkboard - Tiki bar slate */
 .theme-chalkboard .puzzle-grid {
-    background: #1e3a2f;
+    background: linear-gradient(145deg, #1C2A3A 0%, #0F1A25 100%);
     border-radius: var(--radius-md);
 }
 .theme-chalkboard .puzzle-cell {
-    color: #fafafa;
-    border-color: rgba(255,255,255,0.1);
+    color: #F7A072;
+    border-color: rgba(247, 160, 114, 0.15);
     font-family: 'Comic Sans MS', cursive;
 }
 
@@ -859,8 +912,8 @@ body {
     left: 0;
     width: 100%;
     height: 100%;
-    background: rgba(0, 0, 0, 0.5);
-    backdrop-filter: blur(2px);
+    background: rgba(0, 0, 0, 0.7);
+    backdrop-filter: blur(4px);
     z-index: 1000;
     align-items: center;
     justify-content: center;
@@ -872,7 +925,7 @@ body {
 }
 
 .modal-content {
-    background: white;
+    background: var(--card-bg);
     border-radius: var(--radius-md);
     max-width: 900px;
     width: 100%;
@@ -880,6 +933,8 @@ body {
     overflow: auto;
     position: relative;
     animation: modalIn 0.2s ease;
+    border: 1px solid var(--border-color);
+    box-shadow: var(--shadow-xl), 0 0 40px rgba(13, 148, 136, 0.1);
 }
 
 @keyframes modalIn {
@@ -900,22 +955,24 @@ body {
     width: 36px;
     height: 36px;
     border: 1px solid var(--border-color);
-    background: white;
+    background: var(--bg-elevated);
     border-radius: var(--radius-sm);
     font-size: 1.25rem;
     cursor: pointer;
     transition: var(--transition);
     z-index: 10;
+    color: var(--text-color);
 }
 
 .modal-close:hover {
-    background: var(--text-color);
-    border-color: var(--text-color);
-    color: white;
+    background: var(--primary-color);
+    border-color: var(--primary-color);
+    color: #1E293B;
 }
 
 .modal-puzzle-container {
     padding: 32px;
+    color: var(--text-color);
 }
 
 .modal-actions {
@@ -951,11 +1008,12 @@ body {
 }
 
 .about-card {
-    background: white;
+    background: var(--card-bg);
     padding: 24px;
     border-radius: var(--radius-md);
     border: 1px solid var(--border-color);
     text-align: left;
+    box-shadow: var(--shadow-sm);
 }
 
 .about-icon {
@@ -995,10 +1053,11 @@ body {
 .footer {
     text-align: center;
     padding: 32px 20px;
-    color: var(--text-light);
+    color: var(--text-muted);
     font-size: 0.85rem;
     border-top: 1px solid var(--border-color);
     margin-top: 48px;
+    background: var(--bg-color);
 }
 
 /* ========================================
@@ -1428,7 +1487,7 @@ body {
     width: 40px;
     height: 40px;
     border: 4px solid var(--border-color);
-    border-top-color: var(--primary-color);
+    border-top-color: var(--secondary-color);
     border-radius: 50%;
     animation: spin 1s linear infinite;
 }
@@ -1449,12 +1508,14 @@ body {
     left: 50%;
     transform: translateX(-50%);
     padding: 8px 12px;
-    background: var(--text-color);
-    color: white;
+    background: var(--bg-elevated);
+    color: var(--text-color);
     font-size: 0.85rem;
     border-radius: var(--radius-sm);
     white-space: nowrap;
     z-index: 100;
+    border: 1px solid var(--border-color);
+    box-shadow: var(--shadow-md);
 }
 
 /* Toast Notifications */
