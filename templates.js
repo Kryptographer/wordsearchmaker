@@ -24,6 +24,13 @@ const TEMPLATES = {
             'SUN', 'MOON', 'STARS', 'FISH', 'BIRDS', 'ANIMALS', 'ADAM',
             'EVE', 'GARDEN', 'GOOD', 'REST'
         ],
+        wordCategories: {
+            'The Creator': ['GOD'],
+            'Days of Creation': ['LIGHT', 'DARK', 'WATER', 'SKY', 'LAND', 'PLANTS', 'SUN', 'MOON', 'STARS'],
+            'Living Things': ['FISH', 'BIRDS', 'ANIMALS', 'ADAM', 'EVE'],
+            'Special Places': ['GARDEN'],
+            'God\'s Work': ['GOOD', 'REST']
+        },
         hiddenMessage: 'GOD MADE ALL'
     },
 
@@ -43,6 +50,13 @@ const TEMPLATES = {
             'RAINBOW', 'PROMISE', 'BOAT', 'WATER', 'FAMILY', 'FAITH',
             'TWO', 'LION', 'ELEPHANT', 'GIRAFFE'
         ],
+        wordCategories: {
+            'Characters': ['NOAH', 'FAMILY'],
+            'Animals': ['ANIMALS', 'DOVE', 'LION', 'ELEPHANT', 'GIRAFFE'],
+            'The Flood': ['ARK', 'BOAT', 'RAIN', 'FLOOD', 'WATER'],
+            'God\'s Promise': ['RAINBOW', 'PROMISE', 'OLIVE', 'FAITH'],
+            'Numbers': ['TWO']
+        },
         hiddenMessage: 'TRUST GOD'
     },
 
@@ -100,6 +114,14 @@ const TEMPLATES = {
             'SHEPHERDS', 'WISE', 'GIFTS', 'GOLD', 'BETHLEHEM', 'BABY',
             'KING', 'JOY', 'PEACE', 'LOVE', 'GLORY'
         ],
+        wordCategories: {
+            'Characters and People': ['JESUS', 'MARY', 'JOSEPH', 'BABY', 'KING'],
+            'Heavenly Visitors': ['ANGELS', 'STAR'],
+            'Those Who Came': ['SHEPHERDS', 'WISE'],
+            'Places': ['BETHLEHEM', 'MANGER'],
+            'Gifts and Treasures': ['GIFTS', 'GOLD'],
+            'Feelings and Blessings': ['JOY', 'PEACE', 'LOVE', 'GLORY']
+        },
         hiddenMessage: 'SAVIOR BORN'
     },
 
@@ -119,7 +141,37 @@ const TEMPLATES = {
             'MARY', 'HOPE', 'LIFE', 'LOVE', 'SAVE', 'LAMB',
             'GLORY', 'ALIVE', 'SUNDAY', 'EMPTY'
         ],
+        wordCategories: {
+            'Characters': ['JESUS', 'MARY', 'ANGEL', 'LAMB'],
+            'Places': ['TOMB', 'CROSS'],
+            'The Resurrection': ['RISEN', 'ALIVE', 'EMPTY', 'STONE', 'SUNDAY'],
+            'What Jesus Brings': ['HOPE', 'LIFE', 'LOVE', 'SAVE', 'GLORY']
+        },
         hiddenMessage: 'HE IS RISEN'
+    },
+
+    // Boy Jesus at the Temple
+    'bible-temple-en': {
+        id: 'bible-temple-en',
+        title: 'Boy Jesus at the Temple',
+        category: 'bible',
+        language: 'en',
+        difficulty: 'easy',
+        shape: 'square',
+        size: 12,
+        icon: '🏛️',
+        description: 'Jesus as a young boy teaching in the temple',
+        words: [
+            'ABBY', 'JESUS', 'FATHER', 'MOTHER', 'PARENTS', 'CARPENTER',
+            'SYNAGOGUE', 'HOME', 'HONOR', 'OBEY', 'LISTEN', 'RESPECT',
+            'COMMANDMENT', 'WISDOM'
+        ],
+        wordCategories: {
+            'Characters and People': ['ABBY', 'JESUS', 'FATHER', 'MOTHER', 'PARENTS', 'CARPENTER'],
+            'Places': ['SYNAGOGUE', 'HOME'],
+            'Values and Teachings': ['HONOR', 'OBEY', 'LISTEN', 'RESPECT', 'COMMANDMENT', 'WISDOM']
+        },
+        hiddenMessage: 'FOLLOW JESUS'
     },
 
     // Fruits of the Spirit
@@ -665,6 +717,508 @@ const TEMPLATES = {
             'ARMADILLO', 'FLAMINGO', 'PENGUIN', 'PLATYPUS',
             'KANGAROO', 'TARANTULA', 'ALLIGATOR', 'CROCODILE',
             'BARRACUDA', 'BUTTERFLY', 'CENTIPEDE', 'DRAGONFLY'
+        ],
+        hiddenMessage: ''
+    },
+
+    // ==========================================
+    // ADDITIONAL BIBLE TEMPLATES
+    // ==========================================
+
+    // The Good Samaritan
+    'bible-samaritan-en': {
+        id: 'bible-samaritan-en',
+        title: 'The Good Samaritan',
+        category: 'bible',
+        language: 'en',
+        difficulty: 'easy',
+        shape: 'heart',
+        size: 12,
+        icon: '❤️',
+        description: 'The parable of helping others',
+        words: [
+            'SAMARITAN', 'HELP', 'ROAD', 'PRIEST', 'LEVITE', 'INJURED',
+            'BANDAGE', 'OIL', 'WINE', 'DONKEY', 'INN', 'NEIGHBOR',
+            'MERCY', 'LOVE', 'KINDNESS', 'CARE'
+        ],
+        wordCategories: {
+            'Characters': ['SAMARITAN', 'PRIEST', 'LEVITE', 'NEIGHBOR'],
+            'Places': ['ROAD', 'INN'],
+            'Actions of Love': ['HELP', 'BANDAGE', 'CARE', 'MERCY'],
+            'Items Used': ['OIL', 'WINE', 'DONKEY'],
+            'Values': ['LOVE', 'KINDNESS']
+        },
+        hiddenMessage: 'LOVE OTHERS'
+    },
+
+    // The Prodigal Son
+    'bible-prodigal-en': {
+        id: 'bible-prodigal-en',
+        title: 'The Prodigal Son',
+        category: 'bible',
+        language: 'en',
+        difficulty: 'normal',
+        shape: 'square',
+        size: 14,
+        icon: '🏠',
+        description: 'A story of forgiveness and love',
+        words: [
+            'FATHER', 'SON', 'BROTHER', 'HOME', 'PIGS', 'MONEY',
+            'RING', 'ROBE', 'FEAST', 'FORGIVE', 'RETURN', 'LOVE',
+            'WELCOME', 'LOST', 'FOUND', 'CELEBRATE', 'HUG'
+        ],
+        wordCategories: {
+            'Family': ['FATHER', 'SON', 'BROTHER'],
+            'The Journey': ['HOME', 'LOST', 'RETURN', 'FOUND'],
+            'Hard Times': ['PIGS', 'MONEY'],
+            'The Welcome': ['RING', 'ROBE', 'FEAST', 'CELEBRATE', 'HUG'],
+            'Father\'s Love': ['FORGIVE', 'LOVE', 'WELCOME']
+        },
+        hiddenMessage: 'COME HOME'
+    },
+
+    // Daniel and the Lions
+    'bible-daniel-en': {
+        id: 'bible-daniel-en',
+        title: 'Daniel and the Lions',
+        category: 'bible',
+        language: 'en',
+        difficulty: 'normal',
+        shape: 'square',
+        size: 13,
+        icon: '🦁',
+        description: 'Daniel\'s faith in the lion\'s den',
+        words: [
+            'DANIEL', 'LIONS', 'DEN', 'KING', 'PRAY', 'FAITHFUL',
+            'ANGEL', 'SHUT', 'MOUTHS', 'SAFE', 'GOD', 'TRUST',
+            'BABYLON', 'COURAGE', 'PROTECT'
+        ],
+        wordCategories: {
+            'Characters': ['DANIEL', 'KING', 'ANGEL'],
+            'The Danger': ['LIONS', 'DEN', 'MOUTHS'],
+            'Places': ['BABYLON'],
+            'Daniel\'s Faith': ['PRAY', 'FAITHFUL', 'TRUST', 'COURAGE'],
+            'God\'s Protection': ['SAFE', 'SHUT', 'PROTECT', 'GOD']
+        },
+        hiddenMessage: 'GOD PROTECTS'
+    },
+
+    // Moses and the Red Sea
+    'bible-redsea-en': {
+        id: 'bible-redsea-en',
+        title: 'Crossing the Red Sea',
+        category: 'bible',
+        language: 'en',
+        difficulty: 'medium',
+        shape: 'oval',
+        size: 15,
+        icon: '🌊',
+        description: 'The miraculous escape from Egypt',
+        words: [
+            'MOSES', 'PHARAOH', 'EGYPT', 'ISRAEL', 'SEA', 'WATER',
+            'STAFF', 'PART', 'WALL', 'DRY', 'GROUND', 'CHARIOT',
+            'ARMY', 'FREE', 'MIRACLE', 'DELIVER', 'TRUST', 'FOLLOW'
+        ],
+        wordCategories: {
+            'Leaders': ['MOSES', 'PHARAOH'],
+            'Nations': ['EGYPT', 'ISRAEL'],
+            'The Miracle': ['SEA', 'WATER', 'PART', 'WALL', 'DRY', 'GROUND'],
+            'The Enemy': ['CHARIOT', 'ARMY'],
+            'God\'s Work': ['STAFF', 'MIRACLE', 'DELIVER', 'FREE'],
+            'Faith': ['TRUST', 'FOLLOW']
+        },
+        hiddenMessage: 'GOD SAVES'
+    },
+
+    // Sermon on the Mount
+    'bible-sermon-en': {
+        id: 'bible-sermon-en',
+        title: 'Sermon on the Mount',
+        category: 'bible',
+        language: 'en',
+        difficulty: 'medium',
+        shape: 'triangle',
+        size: 15,
+        icon: '⛰️',
+        description: 'The teachings of Jesus',
+        words: [
+            'BLESSED', 'MEEK', 'MERCY', 'PURE', 'PEACE', 'SALT',
+            'LIGHT', 'LOVE', 'PRAY', 'FORGIVE', 'JUDGE', 'ASK',
+            'SEEK', 'KNOCK', 'GOLDEN', 'RULE', 'HEART', 'HEAVEN'
+        ],
+        wordCategories: {
+            'The Beatitudes': ['BLESSED', 'MEEK', 'MERCY', 'PURE', 'PEACE'],
+            'Be Like': ['SALT', 'LIGHT'],
+            'How to Live': ['LOVE', 'PRAY', 'FORGIVE'],
+            'Seek God': ['ASK', 'SEEK', 'KNOCK'],
+            'The Golden Rule': ['GOLDEN', 'RULE'],
+            'The Goal': ['HEART', 'HEAVEN']
+        },
+        hiddenMessage: 'FOLLOW JESUS'
+    },
+
+    // The Lord's Prayer
+    'bible-prayer-en': {
+        id: 'bible-prayer-en',
+        title: 'The Lord\'s Prayer',
+        category: 'bible',
+        language: 'en',
+        difficulty: 'easy',
+        shape: 'cross',
+        size: 12,
+        icon: '🙏',
+        description: 'Words from the prayer Jesus taught',
+        words: [
+            'FATHER', 'HEAVEN', 'HOLY', 'NAME', 'KINGDOM', 'WILL',
+            'BREAD', 'FORGIVE', 'TEMPTATION', 'EVIL', 'POWER',
+            'GLORY', 'AMEN', 'DAILY', 'EARTH'
+        ],
+        wordCategories: {
+            'Who We Pray To': ['FATHER', 'HEAVEN', 'HOLY', 'NAME'],
+            'What We Ask': ['KINGDOM', 'WILL', 'BREAD', 'DAILY'],
+            'Our Needs': ['FORGIVE', 'TEMPTATION', 'EVIL'],
+            'Praise': ['POWER', 'GLORY', 'AMEN'],
+            'Where': ['EARTH']
+        },
+        hiddenMessage: 'PRAY DAILY'
+    },
+
+    // The Armor of God
+    'bible-armor-en': {
+        id: 'bible-armor-en',
+        title: 'The Armor of God',
+        category: 'bible',
+        language: 'en',
+        difficulty: 'hard',
+        shape: 'diamond',
+        size: 16,
+        icon: '🛡️',
+        description: 'Ephesians 6:10-18 - The full armor',
+        words: [
+            'TRUTH', 'BELT', 'RIGHTEOUSNESS', 'BREASTPLATE', 'GOSPEL',
+            'PEACE', 'SHOES', 'FAITH', 'SHIELD', 'SALVATION', 'HELMET',
+            'SPIRIT', 'SWORD', 'PRAYER', 'STAND', 'STRONG', 'BATTLE'
+        ],
+        wordCategories: {
+            'The Belt': ['TRUTH', 'BELT'],
+            'The Breastplate': ['RIGHTEOUSNESS', 'BREASTPLATE'],
+            'The Shoes': ['GOSPEL', 'PEACE', 'SHOES'],
+            'The Shield': ['FAITH', 'SHIELD'],
+            'The Helmet': ['SALVATION', 'HELMET'],
+            'The Sword': ['SPIRIT', 'SWORD'],
+            'How to Fight': ['PRAYER', 'STAND', 'STRONG', 'BATTLE']
+        },
+        hiddenMessage: 'BE STRONG'
+    },
+
+    // The Twelve Apostles
+    'bible-apostles-en': {
+        id: 'bible-apostles-en',
+        title: 'The Twelve Apostles',
+        category: 'bible',
+        language: 'en',
+        difficulty: 'hard',
+        shape: 'circle',
+        size: 16,
+        icon: '✝️',
+        description: 'Jesus\' chosen disciples',
+        words: [
+            'PETER', 'ANDREW', 'JAMES', 'JOHN', 'PHILIP', 'BARTHOLOMEW',
+            'MATTHEW', 'THOMAS', 'THADDAEUS', 'SIMON', 'JUDAS',
+            'DISCIPLE', 'APOSTLE', 'FOLLOW', 'JESUS', 'TWELVE'
+        ],
+        wordCategories: {
+            'The Fishermen': ['PETER', 'ANDREW', 'JAMES', 'JOHN'],
+            'Called by Jesus': ['PHILIP', 'BARTHOLOMEW', 'MATTHEW', 'THOMAS'],
+            'The Others': ['THADDAEUS', 'SIMON', 'JUDAS'],
+            'Their Role': ['DISCIPLE', 'APOSTLE', 'FOLLOW'],
+            'Their Leader': ['JESUS', 'TWELVE']
+        },
+        hiddenMessage: ''
+    },
+
+    // Parable of the Sower - Hard
+    'bible-sower-hard-en': {
+        id: 'bible-sower-hard-en',
+        title: 'Parable of the Sower',
+        category: 'bible',
+        language: 'en',
+        difficulty: 'hard',
+        shape: 'square',
+        size: 16,
+        icon: '🌱',
+        description: 'The seeds and the soils',
+        words: [
+            'FARMER', 'SEED', 'SOIL', 'PATH', 'ROCKY', 'THORNS',
+            'GOOD', 'GROW', 'ROOT', 'SUN', 'WITHER', 'CHOKE',
+            'HARVEST', 'THIRTY', 'SIXTY', 'HUNDRED', 'WORD', 'HEAR',
+            'UNDERSTAND', 'FRUIT'
+        ],
+        wordCategories: {
+            'The Sower': ['FARMER', 'SEED'],
+            'The Soils': ['SOIL', 'PATH', 'ROCKY', 'THORNS', 'GOOD'],
+            'What Happens': ['GROW', 'ROOT', 'WITHER', 'CHOKE'],
+            'The Elements': ['SUN'],
+            'The Harvest': ['HARVEST', 'THIRTY', 'SIXTY', 'HUNDRED', 'FRUIT'],
+            'The Meaning': ['WORD', 'HEAR', 'UNDERSTAND']
+        },
+        hiddenMessage: ''
+    },
+
+    // ==========================================
+    // ADDITIONAL HOLIDAY TEMPLATES
+    // ==========================================
+
+    'holidays-valentines-en': {
+        id: 'holidays-valentines-en',
+        title: 'Valentine\'s Day',
+        category: 'holidays',
+        language: 'en',
+        difficulty: 'easy',
+        shape: 'heart',
+        size: 12,
+        icon: '💝',
+        description: 'Words of love and friendship',
+        words: [
+            'LOVE', 'HEART', 'FRIEND', 'CANDY', 'ROSE', 'RED',
+            'PINK', 'CARD', 'HUG', 'KISS', 'SWEET', 'CARE',
+            'CUPID', 'ARROW', 'GIFT'
+        ],
+        wordCategories: {
+            'Feelings': ['LOVE', 'CARE', 'SWEET'],
+            'Symbols': ['HEART', 'CUPID', 'ARROW', 'ROSE'],
+            'Colors': ['RED', 'PINK'],
+            'Actions': ['HUG', 'KISS'],
+            'Gifts': ['CANDY', 'CARD', 'GIFT', 'FRIEND']
+        },
+        hiddenMessage: 'BE MINE'
+    },
+
+    'holidays-independence-en': {
+        id: 'holidays-independence-en',
+        title: 'Independence Day',
+        category: 'holidays',
+        language: 'en',
+        difficulty: 'normal',
+        shape: 'star',
+        size: 14,
+        icon: '🎆',
+        description: 'Celebrate America!',
+        words: [
+            'FREEDOM', 'FLAG', 'FIREWORKS', 'PARADE', 'RED', 'WHITE',
+            'BLUE', 'STARS', 'STRIPES', 'JULY', 'FOURTH', 'LIBERTY',
+            'AMERICA', 'EAGLE', 'PATRIOT', 'CELEBRATE'
+        ],
+        wordCategories: {
+            'Values': ['FREEDOM', 'LIBERTY'],
+            'Symbols': ['FLAG', 'STARS', 'STRIPES', 'EAGLE'],
+            'Colors': ['RED', 'WHITE', 'BLUE'],
+            'The Date': ['JULY', 'FOURTH'],
+            'Celebration': ['FIREWORKS', 'PARADE', 'CELEBRATE'],
+            'Our Country': ['AMERICA', 'PATRIOT']
+        },
+        hiddenMessage: 'USA'
+    },
+
+    'holidays-winter-en': {
+        id: 'holidays-winter-en',
+        title: 'Winter Wonderland',
+        category: 'holidays',
+        language: 'en',
+        difficulty: 'easy',
+        shape: 'circle',
+        size: 12,
+        icon: '❄️',
+        description: 'Cold weather fun!',
+        words: [
+            'SNOW', 'ICE', 'COLD', 'SLED', 'SKATE', 'SKI',
+            'SNOWMAN', 'MITTENS', 'SCARF', 'COAT', 'BOOTS', 'FROST',
+            'COCOA', 'WARM', 'FIRE'
+        ],
+        wordCategories: {
+            'Weather': ['SNOW', 'ICE', 'COLD', 'FROST'],
+            'Winter Sports': ['SLED', 'SKATE', 'SKI'],
+            'Winter Fun': ['SNOWMAN'],
+            'Stay Warm': ['MITTENS', 'SCARF', 'COAT', 'BOOTS'],
+            'Cozy Inside': ['COCOA', 'WARM', 'FIRE']
+        },
+        hiddenMessage: 'STAY WARM'
+    },
+
+    // ==========================================
+    // ADDITIONAL ANIMAL TEMPLATES
+    // ==========================================
+
+    'animals-birds-en': {
+        id: 'animals-birds-en',
+        title: 'Beautiful Birds',
+        category: 'animals',
+        language: 'en',
+        difficulty: 'normal',
+        shape: 'oval',
+        size: 14,
+        icon: '🦅',
+        description: 'Birds from around the world',
+        words: [
+            'EAGLE', 'OWL', 'PARROT', 'ROBIN', 'SPARROW', 'CROW',
+            'SWAN', 'DUCK', 'GOOSE', 'HAWK', 'PEACOCK', 'CARDINAL',
+            'HUMMINGBIRD', 'PELICAN', 'TOUCAN'
+        ],
+        wordCategories: {
+            'Birds of Prey': ['EAGLE', 'OWL', 'HAWK'],
+            'Colorful Birds': ['PARROT', 'PEACOCK', 'CARDINAL', 'TOUCAN'],
+            'Common Birds': ['ROBIN', 'SPARROW', 'CROW'],
+            'Water Birds': ['SWAN', 'DUCK', 'GOOSE', 'PELICAN'],
+            'Tiny Wonders': ['HUMMINGBIRD']
+        },
+        hiddenMessage: 'FLY HIGH'
+    },
+
+    'animals-insects-en': {
+        id: 'animals-insects-en',
+        title: 'Incredible Insects',
+        category: 'animals',
+        language: 'en',
+        difficulty: 'medium',
+        shape: 'circle',
+        size: 14,
+        icon: '🦋',
+        description: 'Bugs and creepy crawlies',
+        words: [
+            'BUTTERFLY', 'BEE', 'ANT', 'SPIDER', 'BEETLE', 'LADYBUG',
+            'DRAGONFLY', 'CRICKET', 'GRASSHOPPER', 'FIREFLY', 'MOTH',
+            'CATERPILLAR', 'WASP', 'MOSQUITO', 'FLY'
+        ],
+        wordCategories: {
+            'Flying Insects': ['BUTTERFLY', 'BEE', 'DRAGONFLY', 'FIREFLY', 'MOTH', 'FLY'],
+            'Crawling Bugs': ['ANT', 'SPIDER', 'BEETLE', 'LADYBUG', 'CATERPILLAR'],
+            'Jumping Bugs': ['CRICKET', 'GRASSHOPPER'],
+            'Stinging Insects': ['WASP', 'MOSQUITO']
+        },
+        hiddenMessage: 'BUG LIFE'
+    },
+
+    // ==========================================
+    // ADDITIONAL EDUCATIONAL TEMPLATES
+    // ==========================================
+
+    'edu-bodyparts-en': {
+        id: 'edu-bodyparts-en',
+        title: 'Body Parts',
+        category: 'educational',
+        language: 'en',
+        difficulty: 'easy',
+        shape: 'oval',
+        size: 12,
+        icon: '🫀',
+        description: 'Learn about your body',
+        words: [
+            'HEAD', 'ARM', 'LEG', 'HAND', 'FOOT', 'EYE', 'EAR',
+            'NOSE', 'MOUTH', 'HEART', 'BRAIN', 'KNEE', 'ELBOW',
+            'FINGER', 'TOE'
+        ],
+        wordCategories: {
+            'Face Parts': ['EYE', 'EAR', 'NOSE', 'MOUTH'],
+            'Limbs': ['ARM', 'LEG', 'HAND', 'FOOT'],
+            'Joints': ['KNEE', 'ELBOW'],
+            'Small Parts': ['FINGER', 'TOE'],
+            'Inside': ['HEART', 'BRAIN'],
+            'Top': ['HEAD']
+        },
+        hiddenMessage: 'MY BODY'
+    },
+
+    'edu-months-en': {
+        id: 'edu-months-en',
+        title: 'Months of the Year',
+        category: 'educational',
+        language: 'en',
+        difficulty: 'normal',
+        shape: 'circle',
+        size: 14,
+        icon: '📅',
+        description: 'All twelve months',
+        words: [
+            'JANUARY', 'FEBRUARY', 'MARCH', 'APRIL', 'MAY', 'JUNE',
+            'JULY', 'AUGUST', 'SEPTEMBER', 'OCTOBER', 'NOVEMBER', 'DECEMBER',
+            'MONTH', 'YEAR', 'CALENDAR'
+        ],
+        wordCategories: {
+            'Winter Months': ['DECEMBER', 'JANUARY', 'FEBRUARY'],
+            'Spring Months': ['MARCH', 'APRIL', 'MAY'],
+            'Summer Months': ['JUNE', 'JULY', 'AUGUST'],
+            'Fall Months': ['SEPTEMBER', 'OCTOBER', 'NOVEMBER'],
+            'Time Words': ['MONTH', 'YEAR', 'CALENDAR']
+        },
+        hiddenMessage: 'TWELVE'
+    },
+
+    'edu-planets-en': {
+        id: 'edu-planets-en',
+        title: 'Planets & Solar System',
+        category: 'educational',
+        language: 'en',
+        difficulty: 'medium',
+        shape: 'circle',
+        size: 15,
+        icon: '🪐',
+        description: 'Explore our solar system',
+        words: [
+            'MERCURY', 'VENUS', 'EARTH', 'MARS', 'JUPITER', 'SATURN',
+            'URANUS', 'NEPTUNE', 'SUN', 'MOON', 'ASTEROID', 'COMET',
+            'ORBIT', 'PLANET', 'SOLAR', 'SYSTEM', 'RINGS'
+        ],
+        wordCategories: {
+            'Rocky Planets': ['MERCURY', 'VENUS', 'EARTH', 'MARS'],
+            'Gas Giants': ['JUPITER', 'SATURN', 'URANUS', 'NEPTUNE'],
+            'Our Star': ['SUN'],
+            'Earth\'s Companion': ['MOON'],
+            'Space Objects': ['ASTEROID', 'COMET', 'RINGS'],
+            'Science Words': ['ORBIT', 'PLANET', 'SOLAR', 'SYSTEM']
+        },
+        hiddenMessage: 'EXPLORE'
+    },
+
+    // ==========================================
+    // EXTREME CHALLENGES
+    // ==========================================
+
+    'challenge-space-extreme-en': {
+        id: 'challenge-space-extreme-en',
+        title: 'Space Explorer Extreme',
+        category: 'nature',
+        language: 'en',
+        difficulty: 'extreme',
+        shape: 'star',
+        size: 20,
+        icon: '🚀',
+        description: 'Can you find all the space words?',
+        words: [
+            'CONSTELLATION', 'SUPERNOVA', 'BLACKHOLE', 'SATELLITE',
+            'ASTRONAUT', 'TELESCOPE', 'NEBULA', 'GALAXY', 'UNIVERSE',
+            'SPACECRAFT', 'METEORITE', 'ASTEROID', 'ATMOSPHERE',
+            'GRAVITY', 'ECLIPSE', 'ROTATION', 'REVOLUTION', 'LUNAR',
+            'SOLAR', 'COSMIC'
+        ],
+        hiddenMessage: ''
+    },
+
+    'challenge-ocean-extreme-en': {
+        id: 'challenge-ocean-extreme-en',
+        title: 'Deep Sea Challenge',
+        category: 'animals',
+        language: 'en',
+        difficulty: 'extreme',
+        shape: 'oval',
+        size: 20,
+        icon: '🌊',
+        description: 'Dive deep to find all the words!',
+        words: [
+            'SUBMARINE', 'ANGLERFISH', 'BIOLUMINESCENCE', 'MARIANA',
+            'TRENCH', 'PRESSURE', 'HYDROTHERMAL', 'VENT', 'CORAL',
+            'ANEMONE', 'PLANKTON', 'KELP', 'BARNACLE', 'NAUTILUS',
+            'SEAHORSE', 'STINGRAY', 'MANTA', 'HAMMERHEAD', 'ORCA',
+            'HUMPBACK'
         ],
         hiddenMessage: ''
     }
