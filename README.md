@@ -75,41 +75,41 @@ Then open `http://localhost:8000` in your browser.
 
 ## Docker Deployment
 
-### Quick Docker Run
+### Docker Compose (Recommended)
 
-```bash
-# Build the image
-docker build -t wordsearchmaker .
-
-# Run the container
-docker run -d -p 8080:8080 --name wordsearchmaker wordsearchmaker
-```
-
-Then open `http://localhost:8080` in your browser.
-
-### Docker Compose
+Uses the stock `nginx:alpine` image with volume mounts - no build step needed:
 
 ```bash
 docker-compose up -d
 ```
 
-To stop:
+Then open `http://localhost:8080` in your browser. To stop:
 
 ```bash
 docker-compose down
+```
+
+### Build Your Own Image (Optional)
+
+If you prefer a self-contained image (e.g., for pushing to a registry):
+
+```bash
+docker build -t wordsearchmaker .
+docker run -d -p 8080:8080 --name wordsearchmaker wordsearchmaker
 ```
 
 ### Synology NAS Deployment
 
 #### Option 1: Using Container Manager (DSM 7.2+)
 
-1. Open **Container Manager** on your Synology NAS
-2. Go to **Project** > **Create**
-3. Set the project name to `wordsearchmaker`
-4. Set the path to where you uploaded the project files
-5. Select the `docker-compose.yml` file
-6. Click **Build & Start**
-7. Access at `http://your-nas-ip:8080`
+1. Upload all project files to your NAS (e.g., `/volume1/docker/wordsearchmaker/`)
+2. Open **Container Manager** on your Synology NAS
+3. Go to **Project** > **Create**
+4. Set the project name to `wordsearchmaker`
+5. Set the path to where you uploaded the project files
+6. It will auto-detect the `docker-compose.yml`
+7. Click **Next** then **Done**
+8. Access at `http://your-nas-ip:8080`
 
 #### Option 2: Using Docker CLI via SSH
 
@@ -120,21 +120,8 @@ ssh admin@your-nas-ip
 # Navigate to the project directory
 cd /volume1/docker/wordsearchmaker
 
-# Build and start
+# Start the container
 docker-compose up -d
-```
-
-#### Option 3: Pull Pre-built Image
-
-If you've pushed the image to a registry:
-
-```bash
-docker run -d \
-  --name wordsearchmaker \
-  --restart unless-stopped \
-  -p 8080:8080 \
-  -e TZ=America/New_York \
-  wordsearchmaker
 ```
 
 #### Setting Up Reverse Proxy (Optional)
