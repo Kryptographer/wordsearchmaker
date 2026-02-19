@@ -83,7 +83,7 @@ Uses the stock `nginx:alpine` image with volume mounts - no build step needed:
 docker-compose up -d
 ```
 
-Then open `http://localhost:8080` in your browser. To stop:
+Then open `http://localhost:9847` in your browser. To stop:
 
 ```bash
 docker-compose down
@@ -95,7 +95,7 @@ If you prefer a self-contained image (e.g., for pushing to a registry):
 
 ```bash
 docker build -t wordsearchmaker .
-docker run -d -p 8080:8080 --name wordsearchmaker wordsearchmaker
+docker run -d -p 9847:9847 --name wordsearchmaker wordsearchmaker
 ```
 
 ### Synology NAS Deployment
@@ -109,7 +109,7 @@ docker run -d -p 8080:8080 --name wordsearchmaker wordsearchmaker
 5. Set the path to where you uploaded the project files
 6. It will auto-detect the `docker-compose.yml`
 7. Click **Next** then **Done**
-8. Access at `http://your-nas-ip:8080`
+8. Access at `http://your-nas-ip:9847`
 
 #### Option 2: Using Docker CLI via SSH
 
@@ -136,7 +136,7 @@ To access via a subdomain with HTTPS through Synology's built-in reverse proxy:
    - **Source Port**: 443
    - **Destination Protocol**: HTTP
    - **Destination Hostname**: localhost
-   - **Destination Port**: 8080
+   - **Destination Port**: 9847
 3. Apply and configure your DNS to point the subdomain to your NAS
 
 #### Customizing the Port
@@ -145,7 +145,7 @@ Edit `docker-compose.yml` to change the port mapping:
 
 ```yaml
 ports:
-  - "3000:8080"  # Change 3000 to your preferred port
+  - "3000:9847"  # Change 3000 to your preferred port
 ```
 
 #### Customizing the Timezone

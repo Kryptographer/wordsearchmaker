@@ -19,10 +19,10 @@ COPY styles.css /usr/share/nginx/html/
 RUN chown -R nginx:nginx /usr/share/nginx/html && \
     chmod -R 755 /usr/share/nginx/html
 
-EXPOSE 8080
+EXPOSE 9847
 
 # Health check for Synology Container Manager monitoring
 HEALTHCHECK --interval=30s --timeout=3s --start-period=5s --retries=3 \
-    CMD wget -q --spider http://localhost:8080/health || exit 1
+    CMD wget -q --spider http://localhost:9847/health || exit 1
 
 CMD ["nginx", "-g", "daemon off;"]
