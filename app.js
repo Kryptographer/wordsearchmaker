@@ -28,7 +28,10 @@ class WordSearchApp {
     bindEvents() {
         // Tab navigation
         document.querySelectorAll('.nav-tab').forEach(tab => {
-            tab.addEventListener('click', (e) => this.switchTab(e.target.dataset.tab));
+            tab.addEventListener('click', (e) => {
+                const navTab = e.target.closest('.nav-tab');
+                if (navTab) this.switchTab(navTab.dataset.tab);
+            });
         });
 
         // Language selector
@@ -241,11 +244,12 @@ class WordSearchApp {
 
     /**
      * Parse words from input text
+     * Supports accented characters for multilingual puzzles
      */
     parseWords(text) {
         return text
             .split(/[\n,]+/)
-            .map(w => w.trim().toUpperCase().replace(/[^A-Z]/g, ''))
+            .map(w => w.trim().toUpperCase().replace(/[^A-ZÁÉÍÓÚÑÜÀÈÌÒÙÂÊÎÔÛÄËÏÖÜÇÃÕ]/g, ''))
             .filter(w => w.length >= 2);
     }
 
@@ -404,7 +408,12 @@ class WordSearchApp {
             });
         });
 
-        document.addEventListener('mouseup', () => {
+        // Remove previous mouseup handler to prevent memory leak
+        if (this._mouseUpHandler) {
+            document.removeEventListener('mouseup', this._mouseUpHandler);
+        }
+
+        this._mouseUpHandler = () => {
             if (selecting && selectedCells.length > 0) {
                 // Get the selected word
                 const selectedWord = selectedCells.map(c => c.textContent.trim()).join('');
@@ -434,7 +443,9 @@ class WordSearchApp {
             selecting = false;
             startCell = null;
             selectedCells = [];
-        });
+        };
+
+        document.addEventListener('mouseup', this._mouseUpHandler);
     }
 
     /**

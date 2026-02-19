@@ -706,6 +706,17 @@ body {
     border-color: var(--primary-color);
 }
 
+.puzzle-cell.selecting {
+    background: rgba(56, 189, 248, 0.4);
+    color: #FFF;
+    border-color: rgba(56, 189, 248, 0.6);
+    cursor: pointer;
+}
+
+.puzzle-cell.active-cell {
+    cursor: pointer;
+}
+
 .puzzle-cell.found {
     background: var(--success-color);
     color: #1E293B;

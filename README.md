@@ -7,16 +7,16 @@ A fun, interactive web application for creating and printing custom word search 
 ### Pre-Made Templates
 - **40+ ready-to-use templates** across multiple categories:
   - Bible & Faith (English and Spanish)
-  - Holidays (Thanksgiving, Halloween)
-  - Animals (Ocean, Safari, Pets)
+  - Holidays (Thanksgiving, Halloween, Valentine's, Independence Day, Winter)
+  - Animals (Ocean, Safari, Pets, Birds, Insects)
   - Nature (Space, Weather)
-  - Educational (Colors, Numbers, Shapes)
+  - Educational (Colors, Numbers, Shapes, Body Parts, Months, Planets)
 - Filter by category, language, and difficulty
 
 ### Custom Puzzle Builder
 - **Enter your own words** (comma or newline separated)
 - **Configurable grid sizes**: 8x8 to 25x25
-- **7 unique shapes**: Square, Circle, Heart, Cross, Star, Diamond, Triangle, Oval
+- **8 unique shapes**: Square, Circle, Heart, Cross, Star, Diamond, Triangle, Oval
 - **5 difficulty levels**:
   - Easy: Horizontal & vertical only
   - Normal: Adds diagonal directions
@@ -53,6 +53,7 @@ A fun, interactive web application for creating and printing custom word search 
 ### Multi-Language Support
 - UI available in: English, Spanish, French, German, Portuguese, Italian
 - Templates available in English and Spanish
+- Supports accented characters for non-English puzzle words
 
 ## Getting Started
 
@@ -66,14 +67,108 @@ For the best experience, you can run a local server:
 # Python 3
 python -m http.server 8000
 
-# Python 2
-python -m SimpleHTTPServer 8000
-
 # Node.js (with http-server)
 npx http-server
 ```
 
 Then open `http://localhost:8000` in your browser.
+
+## Docker Deployment
+
+### Quick Docker Run
+
+```bash
+# Build the image
+docker build -t wordsearchmaker .
+
+# Run the container
+docker run -d -p 8080:8080 --name wordsearchmaker wordsearchmaker
+```
+
+Then open `http://localhost:8080` in your browser.
+
+### Docker Compose
+
+```bash
+docker-compose up -d
+```
+
+To stop:
+
+```bash
+docker-compose down
+```
+
+### Synology NAS Deployment
+
+#### Option 1: Using Container Manager (DSM 7.2+)
+
+1. Open **Container Manager** on your Synology NAS
+2. Go to **Project** > **Create**
+3. Set the project name to `wordsearchmaker`
+4. Set the path to where you uploaded the project files
+5. Select the `docker-compose.yml` file
+6. Click **Build & Start**
+7. Access at `http://your-nas-ip:8080`
+
+#### Option 2: Using Docker CLI via SSH
+
+```bash
+# SSH into your Synology NAS
+ssh admin@your-nas-ip
+
+# Navigate to the project directory
+cd /volume1/docker/wordsearchmaker
+
+# Build and start
+docker-compose up -d
+```
+
+#### Option 3: Pull Pre-built Image
+
+If you've pushed the image to a registry:
+
+```bash
+docker run -d \
+  --name wordsearchmaker \
+  --restart unless-stopped \
+  -p 8080:8080 \
+  -e TZ=America/New_York \
+  wordsearchmaker
+```
+
+#### Setting Up Reverse Proxy (Optional)
+
+To access via a subdomain with HTTPS through Synology's built-in reverse proxy:
+
+1. Open **Control Panel** > **Login Portal** > **Advanced** > **Reverse Proxy**
+2. Click **Create**:
+   - **Description**: Word Search Maker
+   - **Source Protocol**: HTTPS
+   - **Source Hostname**: wordsearch.yourdomain.com
+   - **Source Port**: 443
+   - **Destination Protocol**: HTTP
+   - **Destination Hostname**: localhost
+   - **Destination Port**: 8080
+3. Apply and configure your DNS to point the subdomain to your NAS
+
+#### Customizing the Port
+
+Edit `docker-compose.yml` to change the port mapping:
+
+```yaml
+ports:
+  - "3000:8080"  # Change 3000 to your preferred port
+```
+
+#### Customizing the Timezone
+
+Edit `docker-compose.yml` to set your timezone:
+
+```yaml
+environment:
+  - TZ=Europe/London  # Change to your timezone
+```
 
 ## Project Structure
 
@@ -85,6 +180,10 @@ wordsearchmaker/
 ├── content-filter.js   # Content safety filters for all languages
 ├── templates.js        # Pre-made puzzle templates and i18n
 ├── styles.css          # Styling and themes
+├── Dockerfile          # Docker image definition
+├── docker-compose.yml  # Docker Compose configuration
+├── nginx.conf          # Nginx web server configuration
+├── .dockerignore       # Docker build exclusions
 └── README.md           # This file
 ```
 
@@ -116,30 +215,9 @@ Works in all modern browsers:
 - Safari
 - Edge
 
-## Deployment
-
-This is a static website with no backend dependencies. To deploy:
-
-1. Copy all files to your web server:
-   - `index.html`
-   - `app.js`
-   - `generator.js`
-   - `content-filter.js`
-   - `templates.js`
-   - `styles.css`
-
-2. Works with any static hosting:
-   - GitHub Pages
-   - Netlify
-   - Vercel
-   - AWS S3
-   - Any web server
-
 ## External Dependencies
 
-- **Google Fonts**: Fredoka One and Nunito (loaded via CDN)
-
-No npm packages or build tools required!
+None! This is a fully self-contained static application using system fonts.
 
 ## License
 

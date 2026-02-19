@@ -444,9 +444,9 @@ class WordSearchGenerator {
      * Main generation function
      */
     generate() {
-        // Clean and validate words
+        // Clean and validate words (supports accented characters for multilingual puzzles)
         let cleanWords = this.words
-            .map(w => w.toUpperCase().replace(/[^A-Z]/g, ''))
+            .map(w => w.toUpperCase().replace(/[^A-ZÁÉÍÓÚÑÜÀÈÌÒÙÂÊÎÔÛÄËÏÖÜÇÃÕ]/g, ''))
             .filter(w => w.length >= 2 && w.length <= this.size)
             .sort((a, b) => b.length - a.length); // Place longer words first
 
